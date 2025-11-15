@@ -11,6 +11,7 @@ export default function Header() {
     { href: "/", label: "ACCUEIL" },
     { href: "/about", label: "BIOGRAPHIE" },
     { href: "/discographie", label: "MUSIC" },
+    { href: "/videos", label: "VIDEOS" },
     { href: "/concerts", label: "CONCERTS" },
     { href: "/contact", label: "CONTACT" },
   ];

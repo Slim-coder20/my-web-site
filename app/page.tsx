@@ -6,11 +6,11 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <div className={styles.homeContainer}>
-      {/* Section Hero */}
+      {/* Section Hero */}    
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>Slim Abida</h1>
-          <p className={styles.heroSubtitle}>Contrast Nouvel album</p>
+          <p className={styles.heroSubtitle}>Contrast Nouvel album </p>
          <div className={styles.heroButtons}>
             <Link href="/discographie" className={styles.primaryButton}>
               Découvrir la Musique

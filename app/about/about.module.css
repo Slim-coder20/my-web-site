@@ -1,0 +1,222 @@
+.aboutContainer {
+  width: 100%;
+  min-height: calc(100vh - 200px);
+  padding-top: 120px; /* Espace pour le header fixe */
+  padding-bottom: 4rem;
+}
+
+.aboutSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Image de profil */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Contenu */
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.bioText {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bioText p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #d0d0d0;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* Bouton musique */
+.buttonWrapper {
+  margin-top: 1rem;
+}
+
+.musicButton {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.musicButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Réseaux sociaux */
+.socialLinks {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(150, 150, 150, 0.2);
+}
+
+.socialTitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.socialIcons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #d0d0d0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.socialLink:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.socialLink svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.socialLink span {
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .aboutSection {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .imageWrapper {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .bioText {
+    text-align: center;
+  }
+
+  .buttonWrapper {
+    text-align: center;
+  }
+
+  .socialLinks {
+    text-align: center;
+  }
+
+  .socialIcons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutContainer {
+    padding-top: 100px;
+    padding-bottom: 3rem;
+  }
+
+  .aboutSection {
+    padding: 0 1.5rem;
+    gap: 2.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .bioText p {
+    font-size: 1rem;
+  }
+
+  .socialIcons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .socialLink {
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutSection {
+    padding: 0 1rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .musicButton {
+    width: 100%;
+    text-align: center;
+  }
+}
