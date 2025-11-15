@@ -4,7 +4,7 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
-  title: "Slim Abida Project",
+  title: "Slim Abida ",
   description: "Site officiel de Slim Abida Project - Jazz Fusion",
 };
 
@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="fr">
       <body>
         <Header />
-        <main>{children}</main>
+        <main className="flex-1 m-0 p-0">{children}</main>
         <Footer />
       </body>
     </html>

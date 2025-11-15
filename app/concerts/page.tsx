@@ -1,9 +1,5 @@
-export default function Concerts () {
-  return (
-    <div>
-      <h1>Concerts</h1>
-    </div>
-  )
-}
+import styles from "./concerts.module.css";
 
-export default Concerts;
+export default function Concerts() {
+  return <div className={styles.concertsContainer}></div>;
+}

@@ -1,9 +1,8 @@
-export default function Discographie () {
+import styles from "./music.module.css"; 
+export default function Discographie() {
   return (
-    <div>
-      <h1>Discographie</h1>
+    <div className={styles.discographieContainer}>
+   
     </div>
   )
 }
-
-export default Discographie;
