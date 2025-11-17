@@ -1,13 +1,13 @@
 /**
  * Composant : BuyButton
- * 
+ *
  * Ce composant affiche le bouton "Acheter" sur chaque carte d'album
  * dans la page discographie.
- * 
+ *
  * FONCTIONNALITÉ :
  * - Au clic, redirige l'utilisateur vers la page de récapitulatif de commande
  * - La page de checkout gérera ensuite la saisie de l'email et le paiement
- * 
+ *
  * NOTE : Ce composant est un Client Component ("use client") car il utilise
  * le hook useRouter de Next.js pour la navigation.
  */
@@ -27,7 +27,7 @@ export default function BuyButton({ productId }: BuyButtonProps) {
 
   /**
    * Gestion du clic sur le bouton "Acheter"
-   * 
+   *
    * Redirige vers la page de checkout avec l'ID du produit.
    * Exemple : /checkout/1 pour l'album avec l'ID 1
    */
