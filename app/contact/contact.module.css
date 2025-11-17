@@ -1,0 +1,16 @@
+.contactContainer {
+  width: 100%;
+  min-height: calc(100vh - 200px);
+  padding-top: 120px; /* Espace pour le header fixe */
+  padding-bottom: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contactFormContainer {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: transparent;
+}
