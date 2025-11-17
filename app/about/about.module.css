@@ -65,6 +65,10 @@
 /* Bouton musique */
 .buttonWrapper {
   margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 1rem 1.5rem;
+  align-items: center;
 }
 
 .musicButton {
@@ -162,7 +166,10 @@
   }
 
   .buttonWrapper {
-    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    justify-items: center;
   }
 
   .socialLinks {
@@ -191,6 +198,10 @@
 
   .bioText p {
     font-size: 1rem;
+  }
+
+  .buttonWrapper {
+    grid-template-columns: 1fr;
   }
 
   .socialIcons {

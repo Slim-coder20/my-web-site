@@ -56,10 +56,18 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+.videoFrame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000000;
+  overflow: hidden;
+}
+
 .video {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
+  object-fit: cover;
   background-color: #000000;
 }
 
@@ -109,7 +117,6 @@
     gap: 1.5rem;
   }
 }
-
 
 /* Réseaux sociaux */
 .socialLinks {
@@ -163,7 +170,7 @@
   font-weight: 400;
   letter-spacing: 0.05em;
 }
-
+/* Responsive UI for videos */
 @media (max-width: 480px) {
   .videosSection {
     padding: 0 1rem;
@@ -175,5 +182,16 @@
 
   .videoInfo {
     padding: 1rem;
+  }
+}
+
+/* Responsive UI for videos */
+@media (max-width: 480px) {
+  .videosSection {
+    padding: 0 1rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
   }
 }
