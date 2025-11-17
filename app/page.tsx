@@ -29,6 +29,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section News */}
+      <section className={styles.section}>
+        <div className={styles.sectionContent}>
+          <h2 className={styles.sectionTitle}>News </h2>
+          <p className={styles.sectionText}>
+            Découvrez les dernières nouvelles de Slim Abida. Contrast nouvel album 
+            N&apos;hésitez pas à nous suivre sur les réseaux sociaux et à nous soutenir en contibuant à notre Crowdfunding.
+          </p>
+          <div className={styles.heroButtons}>
+            <Link href="/news" className={styles.primaryButton} >
+              Voir les news →
+            </Link>
+            <Link href="https://fr.ulule.com/contrast-crowfunding/coming-soon " className={styles.secondaryButton} target="_blank">
+              Soutenir le projet →
+            </Link>
+          </div>
+        </div>
+      </section>
       {/* Section About Preview */}
       <section className={styles.section}>
         <div className={styles.sectionContent}>
@@ -55,6 +73,18 @@ export default function Home() {
           </p>
           <Link href="/discographie" className={styles.linkButton}>
             Écouter maintenant →
+          </Link>
+        </div>
+      </section>
+      {/* Section vidéos Preview */}
+      <section className={styles.section}>
+        <div className={styles.sectionContent}>
+          <h2 className={styles.sectionTitle}>Vidéos</h2>
+          <p className={styles.sectionText}>
+            Découvrez les vidéos de Slim Abida et profitez de ses performances live.
+          </p>
+          <Link href="/videos" className={styles.linkButton}>
+            Voir les vidéos →
           </Link>
         </div>
       </section>
