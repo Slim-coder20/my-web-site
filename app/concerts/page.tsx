@@ -1,51 +1,43 @@
 import styles from "./concerts.module.css";
 import ConcertCard from "@/components/ConcertCard/ConcertCard";
+import { prisma } from "@/lib/prisma";
 
-// Données des concerts
-const concerts = [
-  {
-    id: 1,
-    title: "Asymétrie Alexandrie 2025 Egypt Tour",
-    date: "25 avril 2025",
-    location: "Alexandrie, Egypte",
-    imageUrl: "/images/lives/concert-slim-egypt.jpg",
-    imageAlt: "Concert Asymétrie Alexandrie",
-  },
-  {
-    id: 2,
-    title: "Asymétrie Caire 2025 Egypt Tour",
-    date: "27 avril 2025",
-    location: "Caire, Egypte",
-    imageUrl: "/images/lives/concert-slim-egypt2.jpeg",
-    imageAlt: "Concert Asymétrie Caire",
-  },
-  {
-    id: 3,
-    title: "Asymétrie les Zinzins Tunis",
-    date: "24 octobre 2025",
-    location: "Tunis, Tunisie",
-    imageUrl: "/images/lives/concert-slim-live4.jpg",
-    imageAlt: "Concert Asymétrie Tunis",
-  },
-  {
-    id: 4,
-    title: "Asymétrie Gérard Philpe live à Bonneuil sur Marne",
-    date: "5 octobre 2024",
-    location: "Bonneuil sur Marne, France",
-    imageUrl: "/images/lives/concert-slim-live3.jpg",
-    imageAlt: "Concert Gérard Philpe",
-  },
-  {
-    id: 5,
-    title: "Asymétrie Live au son de la terre",
-    date: "4 avril 2024",
-    location: "Paris, France",
-    imageUrl: "/images/lives/concert-slim-live5.jpg",
-    imageAlt: "Concert Asymétrie Live au son de la terre",
-  },
-];
+// Récupération des concerts depuis la base de données
+async function getConcerts() {
+  try {
+    const concerts = await prisma.concert.findMany({
+      select: {
+        id: true,
+        title: true,
+        date: true,
+        location: true,
+        imageUrl: true,
+        imageAlt: true,
+      },
+      orderBy: {
+        date: "desc", // Tri par date décroissante (les plus récents en premier)
+      },
+    });
+    return concerts;
+  } catch (error) {
+    console.error("Error fetching concerts:", error);
+    return [];
+  }
+}
 
-export default function Concerts() {
+// Fonction pour formater la date en français
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+}
+
+// Page des concerts (Server Component)
+export default async function Concerts() {
+  const concerts = await getConcerts();
+
   return (
     <div className={styles.concertsContainer}>
       <section className={styles.concertsSection}>
@@ -53,18 +45,33 @@ export default function Concerts() {
         <p className={styles.concertsDescription}>
           Tous les Concerts de Slim Abida
         </p>
-        <div className={styles.concertsGrid}>
-          {concerts.map((concert) => (
-            <ConcertCard
-              key={concert.id}
-              title={concert.title}
-              date={concert.date}
-              location={concert.location}
-              imageUrl={concert.imageUrl}
-              imageAlt={concert.imageAlt}
-            />
-          ))}
-        </div>
+        {concerts.length === 0 ? (
+          <div className={styles.emptyState}>
+            <p>Aucun concert disponible pour le moment.</p>
+          </div>
+        ) : (
+          <div className={styles.concertsGrid}>
+            {concerts.map(
+              (concert: {
+                id: number;
+                title: string;
+                date: Date;
+                location: string;
+                imageUrl: string | null;
+                imageAlt: string | null;
+              }) => (
+                <ConcertCard
+                  key={concert.id}
+                  title={concert.title}
+                  date={formatDate(concert.date)}
+                  location={concert.location}
+                  imageUrl={concert.imageUrl || "/images/placeholder.jpg"}
+                  imageAlt={concert.imageAlt || concert.title}
+                />
+              )
+            )}
+          </div>
+        )}
       </section>
     </div>
   );

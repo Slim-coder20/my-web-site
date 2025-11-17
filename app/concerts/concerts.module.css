@@ -41,6 +41,13 @@
   margin-top: 2rem;
 }
 
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #d0d0d0;
+  font-size: 1.1rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .concertsContainer {

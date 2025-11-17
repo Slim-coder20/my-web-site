@@ -6,12 +6,15 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <div className={styles.homeContainer}>
-      {/* Section Hero */}    
+      {/* Section Hero */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>Slim Abida</h1>
+          <h3 className={styles.heroSubtitle2}>
+            Bassiste / Compositeur / Arrangeur
+          </h3>
           <p className={styles.heroSubtitle}>Contrast Nouvel album </p>
-         <div className={styles.heroButtons}>
+          <div className={styles.heroButtons}>
             <Link href="/discographie" className={styles.primaryButton}>
               Découvrir la Musique
             </Link>
@@ -34,14 +37,19 @@ export default function Home() {
         <div className={styles.sectionContent}>
           <h2 className={styles.sectionTitle}>News </h2>
           <p className={styles.sectionText}>
-            Découvrez les dernières nouvelles de Slim Abida. Contrast nouvel album 
-            N&apos;hésitez pas à nous suivre sur les réseaux sociaux et à nous soutenir en contibuant à notre Crowdfunding.
+            Découvrez les dernières nouvelles de Slim Abida. Contrast nouvel
+            album N&apos;hésitez pas à nous suivre sur les réseaux sociaux et à
+            nous soutenir en contibuant à notre Crowdfunding.
           </p>
           <div className={styles.heroButtons}>
-            <Link href="/news" className={styles.primaryButton} >
+            <Link href="/news" className={styles.primaryButton}>
               Voir les news →
             </Link>
-            <Link href="https://fr.ulule.com/contrast-crowfunding/coming-soon " className={styles.secondaryButton} target="_blank">
+            <Link
+              href="https://fr.ulule.com/contrast-crowfunding/coming-soon "
+              className={styles.secondaryButton}
+              target="_blank"
+            >
               Soutenir le projet →
             </Link>
           </div>
@@ -81,7 +89,8 @@ export default function Home() {
         <div className={styles.sectionContent}>
           <h2 className={styles.sectionTitle}>Vidéos</h2>
           <p className={styles.sectionText}>
-            Découvrez les vidéos de Slim Abida et profitez de ses performances live.
+            Découvrez les vidéos de Slim Abida et profitez de ses performances
+            live.
           </p>
           <Link href="/videos" className={styles.linkButton}>
             Voir les vidéos →

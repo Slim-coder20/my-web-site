@@ -27,6 +27,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "static.fnac-static.com",
       },
+      {
+        protocol: "https",
+        hostname:"www.google.com"
+      },
+      {
+        protocol: "https",
+        hostname:"encrypted-tbn0.gstatic.com",
+      }
     ],
   },
 };
