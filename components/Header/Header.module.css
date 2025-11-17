@@ -21,7 +21,7 @@
 
 /* Ligne de séparation horizontale après le nom */
 .headerContainer::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 3rem; /* Après le nom de l'artiste */
   left: 50%;
@@ -29,14 +29,15 @@
   width: 100%;
   max-width: 800px;
   height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(150, 150, 150, 0.3) 20%, 
-    rgba(150, 150, 150, 0.4) 50%, 
-    rgba(150, 150, 150, 0.3) 80%, 
-    transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(150, 150, 150, 0.3) 20%,
+    rgba(150, 150, 150, 0.4) 50%,
+    rgba(150, 150, 150, 0.3) 80%,
+    transparent 100%
+  );
 }
-
 
 /* Barre de navigation */
 .nav {
@@ -65,11 +66,43 @@
   opacity: 0.8;
 }
 
-/* Lien actif avec soulignement */
+/* Lien actif avec soulignement
 .navLink.active {
   text-decoration: underline;
   text-underline-offset: 0.3em;
   text-decoration-thickness: 1px;
+} */
+
+/* Bouton burger */
+.burgerButton {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 100;
+}
+
+.burgerIcon {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.burgerButton.burgerOpen .burgerIcon:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.burgerButton.burgerOpen .burgerIcon:nth-child(2) {
+  opacity: 0;
+}
+
+.burgerButton.burgerOpen .burgerIcon:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
 }
 
 /* Responsive pour petits écrans */
@@ -78,17 +111,46 @@
     padding: 1.5rem 0 1rem 0;
   }
 
+  .headerContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .artistName {
     font-size: 2rem;
   }
 
+  /* Afficher le bouton burger sur mobile */
+  .burgerButton {
+    display: flex;
+  }
+
+  /* Cacher le menu par défaut sur mobile */
   .nav {
-    gap: 1rem;
-    font-size: 0.8rem;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Afficher le menu quand ouvert */
+  .nav.menuOpen {
+    display: flex;
   }
 
   .navLink {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
+    padding: 0.75rem 0;
+    width: 100%;
+    text-align: center;
   }
 }
-
