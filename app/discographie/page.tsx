@@ -1,6 +1,7 @@
 import styles from "./music.module.css";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
+import BuyButton from "@/components/BuyButton/BuyButton";
 // récupération de tous les produits de la base de données // 
 async function getProducts() {
   try {
@@ -78,7 +79,7 @@ export default async function Discographie() {
                     <span className={styles.albumPrice}>
                       {formatPrice(product.priceCents)}
                     </span>
-                    <button className={styles.buyButton}>Acheter</button>
+                    <BuyButton productId={product.id} productTitle={product.title} />
                   </div>
                 </div>
               </div>
