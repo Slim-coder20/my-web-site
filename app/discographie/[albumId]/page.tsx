@@ -6,4 +6,3 @@ export default function AlbumDetail ({ params }: { params: { albumId: string } }
   )
 }
 
-export default AlbumDetail;

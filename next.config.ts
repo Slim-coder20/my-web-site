@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Mode standalone pour déploiement serveur (o2switch)
+  output: "standalone",
+
   images: {
     remotePatterns: [
       {
@@ -29,12 +32,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname:"www.google.com"
+        hostname: "www.google.com",
       },
       {
         protocol: "https",
-        hostname:"encrypted-tbn0.gstatic.com",
-      }
+        hostname: "encrypted-tbn0.gstatic.com",
+      },
     ],
   },
 };
