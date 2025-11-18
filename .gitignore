@@ -46,3 +46,6 @@ next-env.d.ts
 /public/videos/*.mp4
 /public/videos/*.mov
 /public/videos/*.webm
+
+# Documentation (non nécessaire sur GitHub)
+/docs/

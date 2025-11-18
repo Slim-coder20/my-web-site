@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
       mode: "payment", // Mode paiement unique (pas d'abonnement)
       success_url: `${
         process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-      }/discographie?success=true`, // URL de redirection après paiement réussi
+      }/discographie?success=true&session_id={CHECKOUT_SESSION_ID}`, // URL de redirection après paiement réussi avec session_id
       cancel_url: `${
         process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
       }/discographie?canceled=true`, // URL de redirection si annulation

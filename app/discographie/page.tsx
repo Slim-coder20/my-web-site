@@ -2,6 +2,8 @@ import styles from "./music.module.css";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import BuyButton from "@/components/BuyButton/BuyButton";
+import PaymentVerifier from "@/components/PaymentVerifier/PaymentVerifier";
+import { Suspense } from "react";
 // récupération de tous les produits de la base de données // 
 async function getProducts() {
   try {
@@ -43,6 +45,10 @@ export default async function Discographie() {
           Découvrez les albums de Slim Abida et soutenez l&apos;artiste en
           achetant ses œuvres.
         </p>
+        {/* Vérification automatique du paiement après redirection depuis Stripe */}
+        <Suspense fallback={null}>
+          <PaymentVerifier />
+        </Suspense>
 
         {products.length === 0 ? (
           <div className={styles.emptyState}>

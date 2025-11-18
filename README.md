@@ -439,4 +439,4 @@ Pour toute question ou problème, consulter :
 
 ---
 
-**Développé avec ❤️ pour Slim Abida**
+
