@@ -93,6 +93,21 @@
   margin: 0;
 }
 
+.videoDuration {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 300;
+  margin-top: 0.25rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #888;
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .videosContainer {
@@ -130,6 +145,7 @@
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  text-align: center;
   color: #ffffff;
   margin-bottom: 1.5rem;
 }
@@ -138,6 +154,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
+  justify-content: center;
 }
 
 .socialLink {
@@ -182,16 +199,5 @@
 
   .videoInfo {
     padding: 1rem;
-  }
-}
-
-/* Responsive UI for videos */
-@media (max-width: 480px) {
-  .videosSection {
-    padding: 0 1rem;
-  }
-
-  .title {
-    font-size: 1.75rem;
   }
 }

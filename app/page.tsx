@@ -111,6 +111,18 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      {/* Section Formation Preview */}
+      <section className={styles.section}>
+        <div className={styles.sectionContent}>
+          <h2 className={styles.sectionTitle}>Formation</h2>
+          <p className={styles.sectionText}>
+            Découvrez les cours de formation de Slim Abida.
+          </p>
+          <Link href="/pedago" className={styles.linkButton}>
+            Voir les cours →
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

@@ -14,6 +14,7 @@ export default function Header() {
     { href: "/discographie", label: "MUSIC" },
     { href: "/videos", label: "VIDEOS" },
     { href: "/concerts", label: "CONCERTS" },
+    { href: "/pedago", label: "PEDAGO" },
     { href: "/contact", label: "CONTACT" },
   ];
 

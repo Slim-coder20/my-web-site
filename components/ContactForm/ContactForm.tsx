@@ -115,6 +115,7 @@ export default function ContactForm() {
             </option>
             <option value="Demande de concert">Demande de concert</option>
             <option value="Demande de presse">Demande de presse</option>
+            <option value="Demande de formation">Demande de formation</option>
             <option value="Autre">Autre</option>
           </select>
         </div>
