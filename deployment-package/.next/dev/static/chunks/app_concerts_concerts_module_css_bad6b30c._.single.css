@@ -1,0 +1,74 @@
+/* [project]/app/concerts/concerts.module.css [app-client] (css) */
+.concerts-module__b6NuIG__concertsContainer {
+  width: 100%;
+  min-height: calc(100vh - 200px);
+  padding-top: 120px;
+  padding-bottom: 4rem;
+}
+
+.concerts-module__b6NuIG__concertsSection {
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+}
+
+.concerts-module__b6NuIG__concertsTitle {
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+.concerts-module__b6NuIG__concertsDescription {
+  color: #d0d0d0;
+  text-align: center;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.concerts-module__b6NuIG__concertsGrid {
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+  display: grid;
+}
+
+.concerts-module__b6NuIG__emptyState {
+  text-align: center;
+  color: #d0d0d0;
+  padding: 4rem 2rem;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .concerts-module__b6NuIG__concertsContainer {
+    padding-top: 100px;
+    padding-bottom: 3rem;
+  }
+
+  .concerts-module__b6NuIG__concertsSection {
+    padding: 0 1.5rem;
+  }
+
+  .concerts-module__b6NuIG__concertsTitle {
+    font-size: 2rem;
+  }
+
+  .concerts-module__b6NuIG__concertsDescription {
+    font-size: 1rem;
+  }
+
+  .concerts-module__b6NuIG__concertsGrid {
+    gap: 1.5rem;
+  }
+}
+
+/*# sourceMappingURL=app_concerts_concerts_module_css_bad6b30c._.single.css.map*/

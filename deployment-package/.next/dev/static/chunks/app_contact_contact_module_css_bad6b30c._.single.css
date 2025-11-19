@@ -1,0 +1,20 @@
+/* [project]/app/contact/contact.module.css [app-client] (css) */
+.contact-module__xwJ-uq__contactContainer {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 200px);
+  padding-top: 120px;
+  padding-bottom: 4rem;
+  display: flex;
+}
+
+.contact-module__xwJ-uq__contactFormContainer {
+  background-color: #0000;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/*# sourceMappingURL=app_contact_contact_module_css_bad6b30c._.single.css.map*/

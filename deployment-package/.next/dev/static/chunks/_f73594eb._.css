@@ -1,0 +1,273 @@
+/* [project]/app/discographie/music.module.css [app-client] (css) */
+.music-module__vTp0JW__discographieContainer {
+  width: 100%;
+  min-height: calc(100vh - 200px);
+  padding-top: 120px;
+  padding-bottom: 4rem;
+}
+
+.music-module__vTp0JW__discographieSection {
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+}
+
+.music-module__vTp0JW__title {
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+.music-module__vTp0JW__description {
+  color: #d0d0d0;
+  text-align: center;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.music-module__vTp0JW__albumsGrid {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  display: grid;
+}
+
+.music-module__vTp0JW__albumCard {
+  background-color: #ffffff05;
+  border: 1px solid #ffffff1a;
+  border-radius: 8px;
+  flex-direction: column;
+  transition: all .3s;
+  display: flex;
+  overflow: hidden;
+}
+
+.music-module__vTp0JW__albumCard:hover {
+  border-color: #fff3;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px #00000080;
+}
+
+.music-module__vTp0JW__albumCover {
+  aspect-ratio: 1;
+  background-color: #000;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.music-module__vTp0JW__coverImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.music-module__vTp0JW__coverPlaceholder {
+  color: #888;
+  background-color: #ffffff0d;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: .9rem;
+  display: flex;
+}
+
+.music-module__vTp0JW__albumInfo {
+  flex-direction: column;
+  flex: 1;
+  gap: .5rem;
+  padding: 1.5rem;
+  display: flex;
+}
+
+.music-module__vTp0JW__albumTitle {
+  letter-spacing: .1em;
+  color: #fff;
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.music-module__vTp0JW__albumDescription {
+  color: #d0d0d0;
+  white-space: pre-line;
+  margin: 0;
+  font-size: .95rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.music-module__vTp0JW__albumFooter {
+  border-top: 1px solid #ffffff1a;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  display: flex;
+}
+
+.music-module__vTp0JW__albumPrice {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.music-module__vTp0JW__buyButton {
+  color: #fff;
+  letter-spacing: .05em;
+  cursor: pointer;
+  background-color: #ffffff1a;
+  border: 1px solid #fff3;
+  border-radius: 4px;
+  padding: .75rem 1.5rem;
+  font-size: .95rem;
+  font-weight: 400;
+  transition: all .3s;
+}
+
+.music-module__vTp0JW__buyButton:hover {
+  background-color: #fff3;
+  border-color: #ffffff4d;
+  transform: translateY(-2px);
+}
+
+.music-module__vTp0JW__emptyState {
+  text-align: center;
+  color: #d0d0d0;
+  padding: 4rem 2rem;
+  font-size: 1.1rem;
+}
+
+.music-module__vTp0JW__socialLinks {
+  border-top: 1px solid #96969633;
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+
+.music-module__vTp0JW__socialTitle {
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.music-module__vTp0JW__socialIcons {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  display: flex;
+}
+
+.music-module__vTp0JW__socialLink {
+  color: #d0d0d0;
+  border: 1px solid #0000;
+  border-radius: 4px;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem 1rem;
+  font-size: .95rem;
+  text-decoration: none;
+  transition: all .3s;
+  display: flex;
+}
+
+.music-module__vTp0JW__socialLink:hover {
+  color: #fff;
+  background-color: #ffffff0d;
+  border-color: #ffffff4d;
+  transform: translateY(-2px);
+}
+
+.music-module__vTp0JW__socialLink svg {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.music-module__vTp0JW__socialLink span {
+  letter-spacing: .05em;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .music-module__vTp0JW__discographieContainer {
+    padding-top: 100px;
+    padding-bottom: 3rem;
+  }
+
+  .music-module__vTp0JW__discographieSection {
+    padding: 0 1.5rem;
+  }
+
+  .music-module__vTp0JW__title {
+    font-size: 2rem;
+  }
+
+  .music-module__vTp0JW__description {
+    font-size: 1rem;
+  }
+
+  .music-module__vTp0JW__albumsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-module__vTp0JW__discographieSection {
+    padding: 0 1rem;
+  }
+
+  .music-module__vTp0JW__title {
+    font-size: 1.75rem;
+  }
+
+  .music-module__vTp0JW__albumInfo {
+    padding: 1rem;
+  }
+
+  .music-module__vTp0JW__albumFooter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .music-module__vTp0JW__buyButton {
+    width: 100%;
+  }
+}
+
+/* [project]/components/BuyButton/BuyButton.module.css [app-client] (css) */
+.BuyButton-module__3jIF6a__buyButton {
+  color: #fff;
+  letter-spacing: .05em;
+  cursor: pointer;
+  background-color: #ffffff1a;
+  border: 1px solid #fff3;
+  border-radius: 4px;
+  padding: .75rem 1.5rem;
+  font-size: .95rem;
+  font-weight: 400;
+  transition: all .3s;
+}
+
+.BuyButton-module__3jIF6a__buyButton:hover {
+  background-color: #fff3;
+  border-color: #ffffff4d;
+  transform: translateY(-2px);
+}
+
+/*# sourceMappingURL=_f73594eb._.css.map*/

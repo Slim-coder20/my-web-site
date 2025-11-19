@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Volumes/Slim%20Backup/Projets/Dossier%20Professionel%20Studi%202026%20/slim_site_internet/my-web-site/app/concerts/concerts.module.css"],"sourcesContent":[".concertsContainer {\n  width: 100%;\n  min-height: calc(100vh - 200px);\n  padding-top: 120px; /* Espace pour le header fixe */\n  padding-bottom: 4rem;\n}\n\n.concertsSection {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 2rem;\n}\n\n"],"names":[],"mappings":"AAAA;;;;;;;AAOA"}}]
+}

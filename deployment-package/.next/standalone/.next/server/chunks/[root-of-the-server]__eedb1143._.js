@@ -1,0 +1,63 @@
+module.exports=[70406,(e,t,r)=>{t.exports=e.x("next/dist/compiled/@opentelemetry/api",()=>require("next/dist/compiled/@opentelemetry/api"))},93695,(e,t,r)=>{t.exports=e.x("next/dist/shared/lib/no-fallback-error.external.js",()=>require("next/dist/shared/lib/no-fallback-error.external.js"))},18622,(e,t,r)=>{t.exports=e.x("next/dist/compiled/next-server/app-page-turbo.runtime.prod.js",()=>require("next/dist/compiled/next-server/app-page-turbo.runtime.prod.js"))},56704,(e,t,r)=>{t.exports=e.x("next/dist/server/app-render/work-async-storage.external.js",()=>require("next/dist/server/app-render/work-async-storage.external.js"))},32319,(e,t,r)=>{t.exports=e.x("next/dist/server/app-render/work-unit-async-storage.external.js",()=>require("next/dist/server/app-render/work-unit-async-storage.external.js"))},24725,(e,t,r)=>{t.exports=e.x("next/dist/server/app-render/after-task-async-storage.external.js",()=>require("next/dist/server/app-render/after-task-async-storage.external.js"))},24361,(e,t,r)=>{t.exports=e.x("util",()=>require("util"))},29173,(e,t,r)=>{t.exports=e.x("@prisma/client",()=>require("@prisma/client"))},15270,e=>{"use strict";var t=e.i(29173);let r=globalThis.prisma??new t.PrismaClient({log:["error"]});e.s(["prisma",0,r])},44155,e=>{"use strict";var t=e.i(47909),r=e.i(74017),o=e.i(96250),a=e.i(59756),n=e.i(61916),s=e.i(14444),i=e.i(37092),d=e.i(69741),l=e.i(16795),p=e.i(87718),u=e.i(95169),c=e.i(47587),x=e.i(66012),m=e.i(70101),h=e.i(26937),g=e.i(10372),v=e.i(93695);e.i(52474);var f=e.i(220),R=e.i(89171),b=e.i(22880),E=e.i(15270),w=e.i(46245);let y=new b.default(process.env.STRIPE_SECRET_KEY,{apiVersion:"2025-10-29.clover"}),C=process.env.STRIPE_WEBHOOK_SECRET,S=new w.Resend(process.env.RESEND_API_KEY);async function A(e){let t;console.log("🔔 Webhook reçu !");let r=await e.text(),o=e.headers.get("stripe-signature");if(console.log("📝 Signature présente:",!!o),!o)return console.error("❌ Pas de signature dans les headers"),R.NextResponse.json({error:"No signature"},{status:400});try{t=y.webhooks.constructEvent(r,o,C),console.log("✅ Signature vérifiée, type d'événement:",t.type)}catch(e){return console.error("❌ Webhook signature verification failed:",e),R.NextResponse.json({error:"Invalid signature"},{status:400})}if("checkout.session.completed"===t.type){console.log("💳 Événement checkout.session.completed reçu");let e=t.data.object;console.log("📦 Session ID:",e.id);try{console.log(`🔍 Recherche de la commande avec stripeSessionId: ${e.id}`);let t=await E.prisma.order.findUnique({where:{stripeSessionId:e.id}});if(!t&&e.metadata?.orderId&&(console.log(`🔍 Commande non trouv\xe9e par sessionId, recherche par orderId: ${e.metadata.orderId}`),(t=await E.prisma.order.findUnique({where:{id:parseInt(e.metadata.orderId)}}))&&(await E.prisma.order.update({where:{id:t.id},data:{stripeSessionId:e.id}}),console.log(`✅ stripeSessionId mis \xe0 jour pour la commande ${t.id}`))),!t)return console.log(`⚠️  Commande non trouv\xe9e pour la session: ${e.id}`),R.NextResponse.json({received:!0,message:"Order not found (test event)"});let r=await E.prisma.order.update({where:{id:t.id},data:{status:"paid"},include:{items:{include:{product:!0}}}});if(console.log(`✅ Order updated to paid for session: ${e.id}`),process.env.RESEND_API_KEY)try{let e=(r.amountTotal/100).toFixed(2),t=r.items.map(e=>`
+            <tr>
+              <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                <strong>${e.product.title}</strong>
+              </td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: center;">
+                ${e.quantity}
+              </td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee; text-align: right;">
+                ${(e.unitPrice/100).toFixed(2)} €
+              </td>
+            </tr>
+          `).join("");await S.emails.send({from:process.env.RESEND_FROM_EMAIL||"onboarding@resend.dev",to:r.email,subject:"Confirmation de votre commande - Slim Abida",html:`
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h2 style="color: #333; border-bottom: 2px solid #333; padding-bottom: 10px;">
+                  Merci pour votre commande !
+                </h2>
+                
+                <p>Bonjour,</p>
+                
+                <p>Nous avons bien re\xe7u votre commande et votre paiement a \xe9t\xe9 confirm\xe9.</p>
+                
+                <h3 style="color: #333; margin-top: 30px;">D\xe9tails de votre commande</h3>
+                
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                  <thead>
+                    <tr style="background-color: #f5f5f5;">
+                      <th style="padding: 10px; text-align: left; border-bottom: 2px solid #333;">Produit</th>
+                      <th style="padding: 10px; text-align: center; border-bottom: 2px solid #333;">Quantit\xe9</th>
+                      <th style="padding: 10px; text-align: right; border-bottom: 2px solid #333;">Prix</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${t}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="2" style="padding: 10px; text-align: right; font-weight: bold; border-top: 2px solid #333;">
+                        Total :
+                      </td>
+                      <td style="padding: 10px; text-align: right; font-weight: bold; border-top: 2px solid #333;">
+                        ${e} €
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+                
+                <p style="margin-top: 30px;">
+                  Votre commande sera trait\xe9e dans les plus brefs d\xe9lais.
+                </p>
+                
+                <p>
+                  Si vous avez des questions, n'h\xe9sitez pas \xe0 nous contacter.
+                </p>
+                
+                <p style="margin-top: 30px; color: #666; font-size: 14px;">
+                  Cordialement,<br>
+                  L'\xe9quipe Slim Abida
+                </p>
+              </div>
+            `}),console.log(`Confirmation email sent to ${r.email}`)}catch(e){console.error("Error sending confirmation email:",e)}}catch(e){return console.error("❌ Error updating order:",e),e instanceof Error&&(console.error("Error message:",e.message),console.error("Error stack:",e.stack)),R.NextResponse.json({error:"Failed to update order",details:void 0},{status:200})}}return console.log("✅ Webhook traité avec succès"),R.NextResponse.json({received:!0})}e.s(["POST",()=>A],23976);var k=e.i(23976);let N=new t.AppRouteRouteModule({definition:{kind:r.RouteKind.APP_ROUTE,page:"/api/stripe/webhook/route",pathname:"/api/stripe/webhook",filename:"route",bundlePath:""},distDir:".next",relativeProjectDir:"",resolvedPagePath:"[project]/app/api/stripe/webhook/route.ts",nextConfigOutput:"standalone",userland:k}),{workAsyncStorage:P,workUnitAsyncStorage:I,serverHooks:T}=N;function _(){return(0,o.patchFetch)({workAsyncStorage:P,workUnitAsyncStorage:I})}async function j(e,t,o){N.isDev&&(0,a.addRequestMeta)(e,"devRequestTimingInternalsEnd",process.hrtime.bigint());let R="/api/stripe/webhook/route";R=R.replace(/\/index$/,"")||"/";let b=await N.prepare(e,t,{srcPage:R,multiZoneDraftMode:!1});if(!b)return t.statusCode=400,t.end("Bad Request"),null==o.waitUntil||o.waitUntil.call(o,Promise.resolve()),null;let{buildId:E,params:w,nextConfig:y,parsedUrl:C,isDraftMode:S,prerenderManifest:A,routerServerContext:k,isOnDemandRevalidate:P,revalidateOnlyGenerated:I,resolvedPathname:T,clientReferenceManifest:_,serverActionsManifest:j}=b,q=(0,d.normalizeAppPath)(R),O=!!(A.dynamicRoutes[q]||A.routes[T]),$=async()=>((null==k?void 0:k.render404)?await k.render404(e,t,C,!1):t.end("This page could not be found"),null);if(O&&!S){let e=!!A.routes[T],t=A.dynamicRoutes[q];if(t&&!1===t.fallback&&!e){if(y.experimental.adapterPath)return await $();throw new v.NoFallbackError}}let M=null;!O||N.isDev||S||(M="/index"===(M=T)?"/":M);let D=!0===N.isDev||!O,H=O&&!D;j&&_&&(0,s.setReferenceManifestsSingleton)({page:R,clientReferenceManifest:_,serverActionsManifest:j,serverModuleMap:(0,i.createServerModuleMap)({serverActionsManifest:j})});let U=e.method||"GET",F=(0,n.getTracer)(),K=F.getActiveScopeSpan(),B={params:w,prerenderManifest:A,renderOpts:{experimental:{authInterrupts:!!y.experimental.authInterrupts},cacheComponents:!!y.cacheComponents,supportsDynamicResponse:D,incrementalCache:(0,a.getRequestMeta)(e,"incrementalCache"),cacheLifeProfiles:y.cacheLife,waitUntil:o.waitUntil,onClose:e=>{t.on("close",e)},onAfterTaskError:void 0,onInstrumentationRequestError:(t,r,o)=>N.onRequestError(e,t,o,k)},sharedContext:{buildId:E}},L=new l.NodeNextRequest(e),W=new l.NodeNextResponse(t),V=p.NextRequestAdapter.fromNodeNextRequest(L,(0,p.signalFromNodeResponse)(t));try{let s=async e=>N.handle(V,B).finally(()=>{if(!e)return;e.setAttributes({"http.status_code":t.statusCode,"next.rsc":!1});let r=F.getRootSpanAttributes();if(!r)return;if(r.get("next.span_type")!==u.BaseServerSpan.handleRequest)return void console.warn(`Unexpected root span type '${r.get("next.span_type")}'. Please report this Next.js issue https://github.com/vercel/next.js`);let o=r.get("next.route");if(o){let t=`${U} ${o}`;e.setAttributes({"next.route":o,"http.route":o,"next.span_name":t}),e.updateName(t)}else e.updateName(`${U} ${R}`)}),i=!!(0,a.getRequestMeta)(e,"minimalMode"),d=async a=>{var n,d;let l=async({previousCacheEntry:r})=>{try{if(!i&&P&&I&&!r)return t.statusCode=404,t.setHeader("x-nextjs-cache","REVALIDATED"),t.end("This page could not be found"),null;let n=await s(a);e.fetchMetrics=B.renderOpts.fetchMetrics;let d=B.renderOpts.pendingWaitUntil;d&&o.waitUntil&&(o.waitUntil(d),d=void 0);let l=B.renderOpts.collectedTags;if(!O)return await (0,x.sendResponse)(L,W,n,B.renderOpts.pendingWaitUntil),null;{let e=await n.blob(),t=(0,m.toNodeOutgoingHttpHeaders)(n.headers);l&&(t[g.NEXT_CACHE_TAGS_HEADER]=l),!t["content-type"]&&e.type&&(t["content-type"]=e.type);let r=void 0!==B.renderOpts.collectedRevalidate&&!(B.renderOpts.collectedRevalidate>=g.INFINITE_CACHE)&&B.renderOpts.collectedRevalidate,o=void 0===B.renderOpts.collectedExpire||B.renderOpts.collectedExpire>=g.INFINITE_CACHE?void 0:B.renderOpts.collectedExpire;return{value:{kind:f.CachedRouteKind.APP_ROUTE,status:n.status,body:Buffer.from(await e.arrayBuffer()),headers:t},cacheControl:{revalidate:r,expire:o}}}}catch(t){throw(null==r?void 0:r.isStale)&&await N.onRequestError(e,t,{routerKind:"App Router",routePath:R,routeType:"route",revalidateReason:(0,c.getRevalidateReason)({isStaticGeneration:H,isOnDemandRevalidate:P})},k),t}},p=await N.handleResponse({req:e,nextConfig:y,cacheKey:M,routeKind:r.RouteKind.APP_ROUTE,isFallback:!1,prerenderManifest:A,isRoutePPREnabled:!1,isOnDemandRevalidate:P,revalidateOnlyGenerated:I,responseGenerator:l,waitUntil:o.waitUntil,isMinimalMode:i});if(!O)return null;if((null==p||null==(n=p.value)?void 0:n.kind)!==f.CachedRouteKind.APP_ROUTE)throw Object.defineProperty(Error(`Invariant: app-route received invalid cache entry ${null==p||null==(d=p.value)?void 0:d.kind}`),"__NEXT_ERROR_CODE",{value:"E701",enumerable:!1,configurable:!0});i||t.setHeader("x-nextjs-cache",P?"REVALIDATED":p.isMiss?"MISS":p.isStale?"STALE":"HIT"),S&&t.setHeader("Cache-Control","private, no-cache, no-store, max-age=0, must-revalidate");let u=(0,m.fromNodeOutgoingHttpHeaders)(p.value.headers);return i&&O||u.delete(g.NEXT_CACHE_TAGS_HEADER),!p.cacheControl||t.getHeader("Cache-Control")||u.get("Cache-Control")||u.set("Cache-Control",(0,h.getCacheControlHeader)(p.cacheControl)),await (0,x.sendResponse)(L,W,new Response(p.value.body,{headers:u,status:p.value.status||200})),null};K?await d(K):await F.withPropagatedContext(e.headers,()=>F.trace(u.BaseServerSpan.handleRequest,{spanName:`${U} ${R}`,kind:n.SpanKind.SERVER,attributes:{"http.method":U,"http.target":e.url}},d))}catch(t){if(t instanceof v.NoFallbackError||await N.onRequestError(e,t,{routerKind:"App Router",routePath:q,routeType:"route",revalidateReason:(0,c.getRevalidateReason)({isStaticGeneration:H,isOnDemandRevalidate:P})}),O)throw t;return await (0,x.sendResponse)(L,W,new Response(null,{status:500})),null}}e.s(["handler",()=>j,"patchFetch",()=>_,"routeModule",()=>N,"serverHooks",()=>T,"workAsyncStorage",()=>P,"workUnitAsyncStorage",()=>I],44155)}];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__eedb1143._.js.map
