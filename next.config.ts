@@ -1,15 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Configuration pour o2switch (évite les erreurs de build)
-  distDir: "build",
-  experimental: {
-    workerThreads: false,
-    cpus: 1,
-  },
+  // Configuration optimisée pour Vercel
+  // Note: Les configurations o2switch (distDir: "build", workerThreads: false, cpus: 1)
+  // ont été retirées car Vercel gère automatiquement le build et n'a pas ces limitations
 
   images: {
-    // Désactiver l'optimisation d'images pour les fichiers locaux en production
+    // Vercel optimise automatiquement les images, mais on garde unoptimized: true
+    // pour les images locales qui ne peuvent pas être optimisées
     unoptimized: true,
     remotePatterns: [
       {
