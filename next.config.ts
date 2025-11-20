@@ -1,8 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Mode standalone pour déploiement serveur (o2switch)
-  output: "standalone",
+  // Configuration pour o2switch (évite les erreurs de build)
+  distDir: "build",
+  experimental: {
+    workerThreads: false,
+    cpus: 1,
+  },
 
   images: {
     // Désactiver l'optimisation d'images pour les fichiers locaux en production
