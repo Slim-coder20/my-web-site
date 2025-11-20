@@ -1,5 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { createServer } = require("http");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { parse } = require("url");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const next = require("next");
 
 const dev = process.env.NODE_ENV !== "production";

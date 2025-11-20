@@ -50,6 +50,7 @@ next-env.d.ts
 # Documentation (non nécessaire sur GitHub, sauf guides de déploiement)
 /docs/*
 !/docs/DEPLOIEMENT_O2SWITCH.md
+!/docs/NETTOYAGE_AVANT_DEPLOIEMENT.md
 /doc/
 /doc
 
