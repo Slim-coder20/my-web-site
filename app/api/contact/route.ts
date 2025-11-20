@@ -73,10 +73,16 @@ export async function POST(request: NextRequest) {
     const safeSubject = escapeHtml(subject || "Non spécifié");
     const safeMessage = escapeHtml(message).replace(/\n/g, "<br>");
 
+    // Adresse d'envoi pour le formulaire de contact (personnalisée)
+    const fromEmail =
+      process.env.RESEND_FROM_EMAIL_CONTACT ||
+      process.env.RESEND_FROM_EMAIL ||
+      "contact@slimabida.fr";
+
     // Envoi de l'email via Resend
     const response = await resend.emails.send({
-      from: "onboarding@resend.dev", // Email d'envoi (à changer si vous avez un domaine vérifié)
-      to: recipientEmail, // Email de réception (adapté selon l'environnement)
+      from: fromEmail, // Email d'envoi : contact@slimabida.fr pour les emails de contact
+      to: recipientEmail, // Email de réception : slimabidaproject@gmail.com
       subject: safeSubject || "Nouveau message depuis le formulaire de contact",
       html: `
         <h2>Nouveau message de contact</h2>

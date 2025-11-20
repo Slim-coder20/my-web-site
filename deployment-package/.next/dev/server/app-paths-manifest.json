@@ -1,8 +1,0 @@
-{
-  "/about/page": "app/about/page.js",
-  "/concerts/page": "app/concerts/page.js",
-  "/discographie/page": "app/discographie/page.js",
-  "/news/page": "app/news/page.js",
-  "/page": "app/page.js",
-  "/videos/page": "app/videos/page.js"
-}

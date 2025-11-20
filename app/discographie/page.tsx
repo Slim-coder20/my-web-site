@@ -93,6 +93,7 @@ export default async function Discographie() {
           </div>
         )}
       </section>
+      
       {/* Réseaux sociaux */}
       <div className={styles.socialLinks}>
         <h2 className={styles.socialTitle}>Suivez-moi</h2>

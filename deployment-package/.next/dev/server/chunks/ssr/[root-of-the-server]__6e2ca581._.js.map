@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Volumes/Slim%20Backup/Projets/Dossier%20Professionel%20Studi%202026%20/slim_site_internet/my-web-site/app/about/page.tsx"],"sourcesContent":["\n\nexport default function About () {\n  return (\n    <div className={Styles.aboutContainer}>\n      <h1>About</h1>\n    </div>\n  )\n}\n"],"names":[],"mappings":";;;;;;AAEe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAW,OAAO,cAAc;kBACnC,cAAA,8OAAC;sBAAG;;;;;;;;;;;AAGV"}}]
-}

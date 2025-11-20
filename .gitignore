@@ -49,3 +49,19 @@ next-env.d.ts
 
 # Documentation (non nécessaire sur GitHub)
 /docs/
+/doc/
+/doc
+/docs
+
+# Fichiers sensibles (clés API, clés SSH)
+id_rsa
+id_rsa.pub
+*.pem
+Stripe
+"Stripe "
+
+# Dossiers de déploiement (temporaires)
+/deployment-package/
+next-folder.zip
+prisma-client-v*.zip
+deployment-package-*.zip

@@ -1,20 +1,20 @@
 /**
  * Page : /checkout/[productId]
- * 
+ *
  * Cette page affiche le récapitulatif de la commande avant le paiement.
- * 
+ *
  * FONCTIONNALITÉS :
  * - Affiche les détails de l'album sélectionné (image, titre, description, prix)
  * - Affiche un formulaire pour saisir l'email du client
  * - Redirige vers Stripe Checkout après validation du formulaire
- * 
+ *
  * FLUX UTILISATEUR :
  * 1. L'utilisateur clique sur "Acheter" depuis la page discographie
  * 2. Redirection vers cette page avec l'ID du produit
  * 3. Affichage du récapitulatif et du formulaire
  * 4. Saisie de l'email et validation
  * 5. Redirection vers Stripe Checkout (géré par CheckoutForm)
- * 
+ *
  * NOTE : Cette page est un Server Component car elle récupère les données
  * du produit directement depuis la base de données via Prisma.
  */
@@ -27,7 +27,7 @@ import styles from "./checkout.module.css";
 
 /**
  * Fonction pour récupérer un produit depuis la base de données
- * 
+ *
  * @param productId - ID du produit à récupérer
  * @returns Le produit ou null si non trouvé
  */
@@ -52,7 +52,7 @@ async function getProduct(productId: number) {
 
 /**
  * Fonction pour formater le prix en euros
- * 
+ *
  * @param priceCents - Prix en centimes (ex: 1500)
  * @returns Prix formaté en euros (ex: "15,00 €")
  */
@@ -65,21 +65,18 @@ function formatPrice(priceCents: number): string {
 
 /**
  * Composant de la page de checkout
- * 
- * IMPORTANT : Dans Next.js 15, les params sont des Promises
- * et doivent être await avant d'accéder à leurs propriétés.
  */
 export default async function CheckoutPage({
   params,
 }: {
-  params: Promise<{ productId: string }>;
+  params: { productId: string };
 }) {
   // Récupération et parsing du productId depuis l'URL
-  const { productId: productIdParam } = await params;
-  const productId = parseInt(productIdParam);
+  const productId = parseInt(params.productId);
 
   // Validation : si l'ID n'est pas un nombre valide, redirection vers discographie
-  if (isNaN(productId)) {
+  if (isNaN(productId) || productId <= 0) {
+    console.error("Invalid productId:", params.productId);
     redirect("/discographie");
   }
 
@@ -88,6 +85,7 @@ export default async function CheckoutPage({
 
   // Si le produit n'existe pas, redirection vers discographie
   if (!product) {
+    console.error("Product not found for id:", productId);
     redirect("/discographie");
   }
 

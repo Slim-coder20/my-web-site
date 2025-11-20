@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   output: "standalone",
 
   images: {
+    // Désactiver l'optimisation d'images pour les fichiers locaux en production
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

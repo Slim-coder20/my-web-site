@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/concerts/concerts.module.css [app-rsc] (css module)"],"sourcesContent":["__turbopack_context__.v({\n  \"concertsContainer\": \"concerts-module__b6NuIG__concertsContainer\",\n  \"concertsSection\": \"concerts-module__b6NuIG__concertsSection\",\n});\n"],"names":[],"mappings":"AAAA;AACA;AACA;AACA"}},
-    {"offset": {"line": 21, "column": 0}, "map": {"version":3,"sources":["file:///Volumes/Slim%20Backup/Projets/Dossier%20Professionel%20Studi%202026%20/slim_site_internet/my-web-site/app/concerts/page.tsx"],"sourcesContent":["import styles from \"./concerts.module.css\";\n\nexport default function Concerts() {\n  return (\n  <div className={styles.concertsContainer}>\n    <section className={styles.concertsSection}>\n      <h1 className={styles.concertsTitle}>les concerts de Slim Abida</h1>\n      <div className={styles.concertsDescription}>\n        <p>Tous les Concerts de Slim Abida</p>\n        <ConcertCard />\n      \n      </div>\n    </section>\n  \n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACA,8OAAC;QAAI,WAAW,kJAAM,CAAC,iBAAiB;kBACtC,cAAA,8OAAC;YAAQ,WAAW,kJAAM,CAAC,eAAe;;8BACxC,8OAAC;oBAAG,WAAW,kJAAM,CAAC,aAAa;8BAAE;;;;;;8BACrC,8OAAC;oBAAI,WAAW,kJAAM,CAAC,mBAAmB;;sCACxC,8OAAC;sCAAE;;;;;;sCACH,8OAAC;;;;;;;;;;;;;;;;;;;;;;AAOT"}}]
-}

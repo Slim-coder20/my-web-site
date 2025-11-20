@@ -129,8 +129,11 @@ export async function POST(request: NextRequest) {
           )
           .join("");
 
+        // Adresse d'envoi pour les confirmations de commande (noreply)
+        const fromEmail = process.env.RESEND_FROM_EMAIL || "noreply@slimabida.fr";
+
         await resend.emails.send({
-          from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
+          from: fromEmail, // Email d'envoi : noreply@slimabida.fr pour les confirmations
           to: updatedOrder.email,
           subject: "Confirmation de votre commande - Slim Abida",
           html: `

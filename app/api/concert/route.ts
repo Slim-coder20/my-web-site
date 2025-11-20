@@ -5,6 +5,19 @@ import { prisma } from "@/lib/prisma";
 export async function GET() {
   try {
     const concerts = await prisma.concert.findMany({
+      select: {
+        id: true,
+        title: true,
+        date: true,
+        location: true,
+        imageUrl: true,
+        imageAlt: true,
+        description: true,
+        venue: true,
+        ticketUrl: true,
+        createdAt: true,
+        // On exclut updatedAt car il peut contenir des dates invalides (0000-00-00)
+      },
       orderBy: {
         date: "desc", // Tri par date décroissante (les plus récents en premier)
       },

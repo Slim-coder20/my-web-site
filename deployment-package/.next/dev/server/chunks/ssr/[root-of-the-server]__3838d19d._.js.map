@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/contact/contact.module.css [app-rsc] (css module)"],"sourcesContent":["__turbopack_context__.v({\n});\n"],"names":[],"mappings":"AAAA;AACA"}},
-    {"offset": {"line": 19, "column": 0}, "map": {"version":3,"sources":["file:///Volumes/Slim%20Backup/Projets/Dossier%20Professionel%20Studi%202026%20/slim_site_internet/my-web-site/app/contact/page.tsx"],"sourcesContent":["import styles from \"./contact.module.css\";\nexport default function Contact() {\n  return <div className={styles.contactContainer}></div>;\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AACe,SAAS;IACtB,qBAAO,8OAAC;QAAI,WAAW,gJAAM,CAAC,gBAAgB;;;;;;AAChD"}}]
-}

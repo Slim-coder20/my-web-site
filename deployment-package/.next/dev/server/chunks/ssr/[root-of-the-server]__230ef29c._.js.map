@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/videos/videos.module.css [app-rsc] (css module)"],"sourcesContent":["__turbopack_context__.v({\n  \"description\": \"videos-module__KSuI1q__description\",\n  \"socialIcons\": \"videos-module__KSuI1q__socialIcons\",\n  \"socialLink\": \"videos-module__KSuI1q__socialLink\",\n  \"socialLinks\": \"videos-module__KSuI1q__socialLinks\",\n  \"socialTitle\": \"videos-module__KSuI1q__socialTitle\",\n  \"title\": \"videos-module__KSuI1q__title\",\n  \"video\": \"videos-module__KSuI1q__video\",\n  \"videoCard\": \"videos-module__KSuI1q__videoCard\",\n  \"videoDescription\": \"videos-module__KSuI1q__videoDescription\",\n  \"videoFrame\": \"videos-module__KSuI1q__videoFrame\",\n  \"videoInfo\": \"videos-module__KSuI1q__videoInfo\",\n  \"videoTitle\": \"videos-module__KSuI1q__videoTitle\",\n  \"videosContainer\": \"videos-module__KSuI1q__videosContainer\",\n  \"videosGrid\": \"videos-module__KSuI1q__videosGrid\",\n  \"videosSection\": \"videos-module__KSuI1q__videosSection\",\n});\n"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA"}}]
-}

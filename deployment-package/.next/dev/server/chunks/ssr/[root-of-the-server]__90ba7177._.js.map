@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
-    {"offset": {"line": 17, "column": 0}, "map": {"version":3,"sources":["file:///Volumes/Slim%20Backup/Projets/Dossier%20Professionel%20Studi%202026%20/slim_site_internet/my-web-site/app/page.tsx"],"sourcesContent":["import HeroSection from \"@/components/HeroSection/HeroSection\";\n\nexport default function Home() {\n  return (\n    <>\n      <HeroSection />\n    </>\n  );\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE;kBACE,cAAA,8OAAC,oJAAW;;;;;;AAGlB"}}]
-}
