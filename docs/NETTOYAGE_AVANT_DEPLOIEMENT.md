@@ -192,6 +192,7 @@ ls -la
 ```
 
 Vous devriez voir :
+
 - ✅ `app/` (fichiers source)
 - ✅ `components/` (fichiers source)
 - ✅ `lib/` (fichiers source)
@@ -238,6 +239,7 @@ slimabida.fr/
 Si vous avez supprimé quelque chose d'important par erreur :
 
 1. Restaurez depuis la sauvegarde :
+
    ```bash
    cd /home/absl3386
    tar -xzf backup-slimabida-YYYYMMDD.tar.gz
@@ -263,4 +265,3 @@ Si vous avez supprimé quelque chose d'important par erreur :
 - [ ] Prêt pour le nouveau déploiement
 
 Une fois tout vérifié, suivez le guide `docs/DEPLOIEMENT_O2SWITCH.md`.
-
