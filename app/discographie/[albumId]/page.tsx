@@ -43,10 +43,11 @@ function formatPrice(priceCents: number): string {
 export default async function AlbumDetail({
   params,
 }: {
-  params: { albumId: string };
+  params: Promise<{ albumId: string }>;
 }) {
   // Récupération du albumId depuis les params
-  const albumId = params.albumId;
+  // Dans Next.js 15+, params est une Promise et doit être résolu avec await
+  const { albumId } = await params;
 
   // Récupération du produit par slug
   const product = await getProductBySlug(albumId);

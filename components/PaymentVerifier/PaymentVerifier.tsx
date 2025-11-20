@@ -62,6 +62,19 @@ export default function PaymentVerifier() {
     verifyPayment();
   }, [searchParams]);
 
+  // Masquer automatiquement le message de succès après 3 secondes
+  useEffect(() => {
+    if (status === "success") {
+      const timer = setTimeout(() => {
+        setStatus(null);
+        setMessage("");
+      }, 3000); // 3000ms = 3 secondes
+
+      // Nettoyer le timer si le composant est démonté avant la fin du délai
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
+
   if (!status) {
     return null;
   }

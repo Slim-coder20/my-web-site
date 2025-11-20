@@ -69,14 +69,16 @@ function formatPrice(priceCents: number): string {
 export default async function CheckoutPage({
   params,
 }: {
-  params: { productId: string };
+  params: Promise<{ productId: string }>;
 }) {
   // Récupération et parsing du productId depuis l'URL
-  const productId = parseInt(params.productId);
+  // params est une Promise et doit être résolu avec await
+  const { productId: productIdParam } = await params;
+  const productId = parseInt(productIdParam);
 
   // Validation : si l'ID n'est pas un nombre valide, redirection vers discographie
   if (isNaN(productId) || productId <= 0) {
-    console.error("Invalid productId:", params.productId);
+    console.error("Invalid productId:", productIdParam);
     redirect("/discographie");
   }
 
