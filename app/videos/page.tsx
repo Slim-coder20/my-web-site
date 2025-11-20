@@ -1,6 +1,9 @@
 import styles from "./videos.module.css";
 import { prisma } from "@/lib/prisma";
 
+// Forcer le rendu dynamique (SSR) pour éviter les erreurs de connexion MySQL pendant le build
+export const dynamic = "force-dynamic";
+
 // Récupération des vidéos depuis la base de données
 async function getVideos() {
   try {

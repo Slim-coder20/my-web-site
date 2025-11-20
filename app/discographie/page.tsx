@@ -4,6 +4,9 @@ import { prisma } from "@/lib/prisma";
 import BuyButton from "@/components/BuyButton/BuyButton";
 import PaymentVerifier from "@/components/PaymentVerifier/PaymentVerifier";
 import { Suspense } from "react";
+
+// Forcer le rendu dynamique (SSR) pour éviter les erreurs de connexion MySQL pendant le build
+export const dynamic = "force-dynamic";
 // récupération de tous les produits de la base de données // 
 async function getProducts() {
   try {

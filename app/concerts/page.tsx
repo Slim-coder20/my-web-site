@@ -2,6 +2,9 @@ import styles from "./concerts.module.css";
 import ConcertCard from "@/components/ConcertCard/ConcertCard";
 import { prisma } from "@/lib/prisma";
 
+// Forcer le rendu dynamique (SSR) pour éviter les erreurs de connexion MySQL pendant le build
+export const dynamic = "force-dynamic";
+
 // Récupération des concerts depuis la base de données
 async function getConcerts() {
   try {
