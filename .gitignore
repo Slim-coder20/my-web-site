@@ -47,11 +47,11 @@ next-env.d.ts
 /public/videos/*.mov
 /public/videos/*.webm
 
-# Documentation (non nécessaire sur GitHub)
-/docs/
+# Documentation (non nécessaire sur GitHub, sauf guides de déploiement)
+/docs/*
+!/docs/DEPLOIEMENT_O2SWITCH.md
 /doc/
 /doc
-/docs
 
 # Fichiers sensibles (clés API, clés SSH)
 id_rsa
