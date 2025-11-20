@@ -8,6 +8,9 @@ export const dynamic = "force-dynamic";
 // Récupération des concerts depuis la base de données
 async function getConcerts() {
   try {
+    console.log("🔍 Tentative de connexion à MySQL pour concerts...");
+    console.log("DATABASE_URL:", process.env.DATABASE_URL ? "✅ Définie" : "❌ Non définie");
+    
     const concerts = await prisma.concert.findMany({
       select: {
         id: true,
@@ -21,9 +24,15 @@ async function getConcerts() {
         date: "desc", // Tri par date décroissante (les plus récents en premier)
       },
     });
+    
+    console.log(`✅ ${concerts.length} concerts récupérés`);
     return concerts;
   } catch (error) {
-    console.error("Error fetching concerts:", error);
+    console.error("❌ Error fetching concerts:", error);
+    if (error instanceof Error) {
+      console.error("Message:", error.message);
+      console.error("Stack:", error.stack);
+    }
     return [];
   }
 }

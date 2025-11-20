@@ -10,6 +10,9 @@ export const dynamic = "force-dynamic";
 // récupération de tous les produits de la base de données // 
 async function getProducts() {
   try {
+    console.log("🔍 Tentative de connexion à MySQL...");
+    console.log("DATABASE_URL:", process.env.DATABASE_URL ? "✅ Définie" : "❌ Non définie");
+    
     const products = await prisma.product.findMany({
       select: {
         id: true,
@@ -23,9 +26,15 @@ async function getProducts() {
         id: "desc", // Utilise id au lieu de createdAt pour éviter le problème de date
       },
     });
+    
+    console.log(`✅ ${products.length} produits récupérés`);
     return products;
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.error("❌ Error fetching products:", error);
+    if (error instanceof Error) {
+      console.error("Message:", error.message);
+      console.error("Stack:", error.stack);
+    }
     return [];
   }
 }

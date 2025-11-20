@@ -7,6 +7,9 @@ export const dynamic = "force-dynamic";
 // Récupération des vidéos depuis la base de données
 async function getVideos() {
   try {
+    console.log("🔍 Tentative de connexion à MySQL pour vidéos...");
+    console.log("DATABASE_URL:", process.env.DATABASE_URL ? "✅ Définie" : "❌ Non définie");
+    
     const videos = await prisma.video.findMany({
       select: {
         id: true,
@@ -23,9 +26,15 @@ async function getVideos() {
         id: "desc", // Tri par id au lieu de createdAt pour éviter les problèmes de dates
       },
     });
+    
+    console.log(`✅ ${videos.length} vidéos récupérées`);
     return videos;
   } catch (error) {
-    console.error("Erreur lors de la récupération des vidéos:", error);
+    console.error("❌ Erreur lors de la récupération des vidéos:", error);
+    if (error instanceof Error) {
+      console.error("Message:", error.message);
+      console.error("Stack:", error.stack);
+    }
     return [];
   }
 }
