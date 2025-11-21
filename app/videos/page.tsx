@@ -9,8 +9,11 @@ export const dynamic = "force-dynamic";
 async function getVideos() {
   try {
     console.log("🔍 Tentative de connexion à MySQL pour vidéos...");
-    console.log("DATABASE_URL:", process.env.DATABASE_URL ? "✅ Définie" : "❌ Non définie");
-    
+    console.log(
+      "DATABASE_URL:",
+      process.env.DATABASE_URL ? "✅ Définie" : "❌ Non définie"
+    );
+
     const videos = await prisma.video.findMany({
       where: {
         // Exclure la vidéo d'arrière-plan de la page d'accueil
@@ -35,7 +38,7 @@ async function getVideos() {
         id: "desc", // Tri par id au lieu de createdAt pour éviter les problèmes de dates
       },
     });
-    
+
     console.log(`✅ ${videos.length} vidéos récupérées`);
     return videos;
   } catch (error) {
