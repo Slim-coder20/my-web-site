@@ -46,7 +46,7 @@ export default function VideosClient({ videos }: VideosClientProps) {
               thumbnailUrl={video.thumbnailUrl}
               className={styles.video}
               controls
-              preload="metadata"
+              preload="none"
             />
           </div>
           <div className={styles.videoInfo}>
@@ -65,4 +65,3 @@ export default function VideosClient({ videos }: VideosClientProps) {
     </div>
   );
 }
-

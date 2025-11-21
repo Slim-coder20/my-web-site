@@ -24,8 +24,7 @@ export default function VideoPlayer({
   autoPlay = false,
   loop = false,
   muted = false,
-  playsInline = false,
-  preload = "metadata",
+      playsInline = false,
 }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -35,8 +34,16 @@ export default function VideoPlayer({
 
     console.log(`🎥 Tentative de chargement de la vidéo: ${videoUrl}`);
 
+    let loadTimeout: NodeJS.Timeout | null = null;
+
     const handleLoadStart = () => {
       console.log(`✅ Début du chargement: ${videoUrl}`);
+      // Timeout de 30 secondes pour détecter si la vidéo ne se charge pas
+      loadTimeout = setTimeout(() => {
+        if (video.readyState < 2) {
+          console.warn(`⏱️ Timeout: La vidéo ${videoUrl} ne se charge pas après 30 secondes`);
+        }
+      }, 30000);
     };
 
     const handleLoadedMetadata = () => {
@@ -45,13 +52,32 @@ export default function VideoPlayer({
         videoWidth: video.videoWidth,
         videoHeight: video.videoHeight,
       });
+      if (loadTimeout) {
+        clearTimeout(loadTimeout);
+        loadTimeout = null;
+      }
     };
 
     const handleCanPlay = () => {
       console.log(`✅ Vidéo prête à être lue: ${videoUrl}`);
+      if (loadTimeout) {
+        clearTimeout(loadTimeout);
+        loadTimeout = null;
+      }
     };
 
-    const handleError = (e: Event) => {
+    const handleProgress = () => {
+      if (video.buffered.length > 0) {
+        const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+        const duration = video.duration;
+        if (duration > 0) {
+          const percentLoaded = (bufferedEnd / duration) * 100;
+          console.log(`📊 Progression: ${percentLoaded.toFixed(1)}% chargé pour ${videoUrl}`);
+        }
+      }
+    };
+
+    const handleError = () => {
       const error = video.error;
       console.error(`❌ Erreur lors du chargement de la vidéo: ${videoUrl}`, {
         errorCode: error?.code,
@@ -59,6 +85,10 @@ export default function VideoPlayer({
         networkState: video.networkState,
         readyState: video.readyState,
       });
+      if (loadTimeout) {
+        clearTimeout(loadTimeout);
+        loadTimeout = null;
+      }
       // Afficher un message d'erreur visuel si nécessaire
       if (video.parentElement) {
         video.parentElement.style.backgroundColor = "#1a1a1a";
@@ -77,14 +107,19 @@ export default function VideoPlayer({
     video.addEventListener("loadstart", handleLoadStart);
     video.addEventListener("loadedmetadata", handleLoadedMetadata);
     video.addEventListener("canplay", handleCanPlay);
+    video.addEventListener("progress", handleProgress);
     video.addEventListener("error", handleError);
     video.addEventListener("stalled", handleStalled);
     video.addEventListener("waiting", handleWaiting);
 
     return () => {
+      if (loadTimeout) {
+        clearTimeout(loadTimeout);
+      }
       video.removeEventListener("loadstart", handleLoadStart);
       video.removeEventListener("loadedmetadata", handleLoadedMetadata);
       video.removeEventListener("canplay", handleCanPlay);
+      video.removeEventListener("progress", handleProgress);
       video.removeEventListener("error", handleError);
       video.removeEventListener("stalled", handleStalled);
       video.removeEventListener("waiting", handleWaiting);
@@ -103,9 +138,8 @@ export default function VideoPlayer({
       muted={muted}
       playsInline={playsInline}
       className={className}
-      preload={preload}
+      preload="none"
       poster={thumbnailUrl || undefined}
-      crossOrigin="anonymous"
     >
       <source src={normalizedUrl} type={videoType || "video/mp4"} />
       Votre navigateur ne supporte pas la lecture de vidéos.
