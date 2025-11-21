@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import styles from "./VideoPlayer.module.css";
 
 interface VideoPlayerProps {
   videoUrl: string;
@@ -34,18 +33,23 @@ export default function VideoPlayer({
     const video = videoRef.current;
     if (!video) return;
 
-    const handleError = () => {
-      console.error(`Erreur lors du chargement de la vidéo: ${videoUrl}`);
+    const handleError = (e: Event | string) => {
+      const errorEvent = typeof e === "string" ? new Event(e) : e;
+      console.error(
+        `Erreur lors du chargement de la vidéo: ${videoUrl}`,
+        errorEvent
+      );
       // Afficher un message d'erreur visuel si nécessaire
       if (video.parentElement) {
         video.parentElement.style.backgroundColor = "#1a1a1a";
       }
     };
 
-    video.addEventListener("error", handleError);
+    // Utiliser addEventListener au lieu de onerror pour éviter les problèmes de sérialisation
+    video.addEventListener("error", handleError as EventListener);
 
     return () => {
-      video.removeEventListener("error", handleError);
+      video.removeEventListener("error", handleError as EventListener);
     };
   }, [videoUrl]);
 
