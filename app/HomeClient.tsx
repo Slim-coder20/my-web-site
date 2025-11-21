@@ -14,21 +14,19 @@ export default function HomeClient({
   backgroundVideoType,
 }: HomeClientProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const currentUrlRef = useRef<string | null>(null);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !backgroundVideoUrl) return;
+    if (!video) return;
 
+    // Ne configurer les event listeners qu'une seule fois
     const handleError = (e: Event) => {
       console.warn("La vidéo en arrière-plan n'a pas pu être chargée:", e);
       // Masquer la vidéo en cas d'erreur
       if (video.parentElement) {
         video.parentElement.style.display = "none";
       }
-    };
-
-    const handleLoadStart = () => {
-      console.log("Début du chargement de la vidéo");
     };
 
     const handleCanPlay = () => {
@@ -42,22 +40,44 @@ export default function HomeClient({
       });
     };
 
-    const handleLoadedData = () => {
-      console.log("Données vidéo chargées");
-    };
-
     video.addEventListener("error", handleError);
-    video.addEventListener("loadstart", handleLoadStart);
     video.addEventListener("canplay", handleCanPlay);
-    video.addEventListener("loadeddata", handleLoadedData);
 
     return () => {
       video.removeEventListener("error", handleError);
-      video.removeEventListener("loadstart", handleLoadStart);
       video.removeEventListener("canplay", handleCanPlay);
-      video.removeEventListener("loadeddata", handleLoadedData);
     };
-  }, [backgroundVideoUrl]);
+  }, []); // Ne se déclenche qu'une seule fois au montage
+
+  // Effet séparé pour mettre à jour la source de la vidéo
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !backgroundVideoUrl) return;
+
+    // Éviter les rechargements inutiles si l'URL n'a pas changé
+    if (currentUrlRef.current === backgroundVideoUrl) {
+      return;
+    }
+
+    const source = video.querySelector("source");
+    if (source) {
+      source.src = backgroundVideoUrl;
+      if (backgroundVideoType) {
+        source.type = backgroundVideoType;
+      }
+      // Marquer l'URL actuelle pour éviter les rechargements en boucle
+      currentUrlRef.current = backgroundVideoUrl;
+      
+      // Utiliser un timeout pour éviter les boucles de re-rendu
+      const timeoutId = setTimeout(() => {
+        video.load();
+      }, 100);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [backgroundVideoUrl, backgroundVideoType]);
 
   return (
     <div className={styles.homeContainer}>

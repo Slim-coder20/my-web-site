@@ -62,18 +62,24 @@ async function addVideoAlbum() {
     } else {
       // Réinitialiser la séquence PostgreSQL si nécessaire
       try {
-        const maxIdResult = await prisma.$queryRaw<Array<{ max: bigint | null }>>`
+        const maxIdResult = await prisma.$queryRaw<
+          Array<{ max: bigint | null }>
+        >`
           SELECT MAX(id) as max FROM "Video"
         `;
         const maxId = maxIdResult[0]?.max ? Number(maxIdResult[0].max) : 0;
-        
+
         // Réinitialiser la séquence pour éviter les conflits d'ID
         await prisma.$executeRawUnsafe(
-          `SELECT setval(pg_get_serial_sequence('"Video"', 'id'), ${maxId + 1}, false)`
+          `SELECT setval(pg_get_serial_sequence('"Video"', 'id'), ${
+            maxId + 1
+          }, false)`
         );
         console.log(`📊 Séquence réinitialisée (prochain ID: ${maxId + 1})`);
       } catch (seqError) {
-        console.warn("⚠️  Impossible de réinitialiser la séquence, continuation...");
+        console.warn(
+          "⚠️  Impossible de réinitialiser la séquence, continuation..."
+        );
       }
 
       // Créer une nouvelle vidéo
