@@ -1,5 +1,6 @@
 import styles from "./videos.module.css";
 import { prisma } from "@/lib/prisma";
+import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 
 // Forcer le rendu dynamique (SSR) pour éviter les erreurs de connexion MySQL pendant le build
 export const dynamic = "force-dynamic";
@@ -66,30 +67,14 @@ export default async function Videos() {
             {videos.map((video) => (
               <div className={styles.videoCard} key={video.id}>
                 <div className={styles.videoFrame}>
-                  <video
-                    controls
+                  <VideoPlayer
+                    videoUrl={video.videoUrl}
+                    videoType={video.videoType}
+                    thumbnailUrl={video.thumbnailUrl}
                     className={styles.video}
+                    controls
                     preload="metadata"
-                    poster={video.thumbnailUrl || undefined}
-                    onError={(e) => {
-                      console.error(
-                        `Erreur lors du chargement de la vidéo ${video.id}:`,
-                        video.videoUrl
-                      );
-                      // Afficher un message d'erreur visuel si nécessaire
-                      const videoElement = e.currentTarget;
-                      if (videoElement.parentElement) {
-                        videoElement.parentElement.style.backgroundColor =
-                          "#1a1a1a";
-                      }
-                    }}
-                  >
-                    <source
-                      src={video.videoUrl}
-                      type={video.videoType || "video/mp4"}
-                    />
-                    Votre navigateur ne supporte pas la lecture de vidéos.
-                  </video>
+                  />
                 </div>
                 <div className={styles.videoInfo}>
                   <h3 className={styles.videoTitle}>{video.title}</h3>
