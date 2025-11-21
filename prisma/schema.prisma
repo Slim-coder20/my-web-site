@@ -9,6 +9,8 @@ generator client {
 datasource db {
   provider = "postgresql" // Changé de MySQL à PostgreSQL pour Supabase
   url      = env("DATABASE_URL")
+  // Note: Pour Supabase pooler, la connection string doit contenir ?pgbouncer=true
+  // Format: postgresql://...@pooler.supabase.com:6543/postgres?pgbouncer=true
 }
 
 model Product {
