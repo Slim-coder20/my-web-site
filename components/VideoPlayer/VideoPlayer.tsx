@@ -35,9 +35,7 @@ export default function VideoPlayer({
     if (!video) return;
 
     const handleError = () => {
-      console.error(
-        `Erreur lors du chargement de la vidéo: ${videoUrl}`
-      );
+      console.error(`Erreur lors du chargement de la vidéo: ${videoUrl}`);
       // Afficher un message d'erreur visuel si nécessaire
       if (video.parentElement) {
         video.parentElement.style.backgroundColor = "#1a1a1a";
@@ -68,4 +66,3 @@ export default function VideoPlayer({
     </video>
   );
 }
-

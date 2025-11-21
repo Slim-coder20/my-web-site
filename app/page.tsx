@@ -11,27 +11,43 @@ export default function Home() {
     const video = videoRef.current;
     if (!video) return;
 
-    const handleError = () => {
-      console.warn("La vidéo en arrière-plan n'a pas pu être chargée");
+    const handleError = (e: Event) => {
+      console.warn("La vidéo en arrière-plan n'a pas pu être chargée:", e);
       // Masquer la vidéo en cas d'erreur
       if (video.parentElement) {
         video.parentElement.style.display = "none";
       }
     };
 
+    const handleLoadStart = () => {
+      console.log("Début du chargement de la vidéo");
+    };
+
     const handleCanPlay = () => {
       // La vidéo est prête à être lue
       video.play().catch((error) => {
         console.warn("Erreur lors de la lecture de la vidéo:", error);
+        // Si la lecture échoue, masquer la vidéo
+        if (video.parentElement) {
+          video.parentElement.style.display = "none";
+        }
       });
     };
 
+    const handleLoadedData = () => {
+      console.log("Données vidéo chargées");
+    };
+
     video.addEventListener("error", handleError);
+    video.addEventListener("loadstart", handleLoadStart);
     video.addEventListener("canplay", handleCanPlay);
+    video.addEventListener("loadeddata", handleLoadedData);
 
     return () => {
       video.removeEventListener("error", handleError);
+      video.removeEventListener("loadstart", handleLoadStart);
       video.removeEventListener("canplay", handleCanPlay);
+      video.removeEventListener("loadeddata", handleLoadedData);
     };
   }, []);
 
