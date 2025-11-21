@@ -27,9 +27,20 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: NextRequest) {
   try {
+    // Vérifier les variables d'environnement nécessaires
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error("❌ STRIPE_SECRET_KEY n'est pas définie");
+      return NextResponse.json(
+        { error: "Stripe configuration error" },
+        { status: 500 }
+      );
+    }
+
     // Récupération des données du body (productId et email)
     const body = await request.json();
     const { productId, email } = body;
+
+    console.log("🔍 Création checkout session:", { productId, email });
 
     // Validation des données requises
     if (!productId || !email) {
@@ -39,14 +50,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Récupération du produit depuis la base de données MySQL
+    // Récupération du produit depuis la base de données
+    console.log("🔍 Récupération du produit ID:", productId);
     const product = await prisma.product.findUnique({
       where: { id: parseInt(productId) },
     });
 
     if (!product) {
+      console.error("❌ Produit non trouvé:", productId);
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
+
+    console.log("✅ Produit trouvé:", product.title);
 
     /**
      * ÉTAPE 1 : Création de l'Order en base de données
@@ -55,6 +70,7 @@ export async function POST(request: NextRequest) {
      * Statut initial : "pending" (en attente de paiement)
      * Le statut sera mis à jour à "paid" par le webhook Stripe après paiement réussi.
      */
+    console.log("🔍 Création de l'Order...");
     const order = await prisma.order.create({
       data: {
         email, // Email du client pour la confirmation
@@ -70,6 +86,8 @@ export async function POST(request: NextRequest) {
         },
       },
     });
+
+    console.log("✅ Order créée:", order.id);
 
     /**
      * ÉTAPE 2 : Création de la session Stripe Checkout
@@ -110,6 +128,8 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    console.log("✅ Session Stripe créée:", session.id);
+
     /**
      * ÉTAPE 3 : Mise à jour de l'Order avec le stripeSessionId
      * 
@@ -125,9 +145,16 @@ export async function POST(request: NextRequest) {
     // Retour de l'URL de la session Stripe pour rediriger l'utilisateur
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error) {
-    console.error("Error creating checkout session:", error);
+    console.error("❌ Error creating checkout session:", error);
+    if (error instanceof Error) {
+      console.error("Message:", error.message);
+      console.error("Stack:", error.stack);
+    }
     return NextResponse.json(
-      { error: "Failed to create checkout session" },
+      { 
+        error: "Failed to create checkout session",
+        details: error instanceof Error ? error.message : String(error)
+      },
       { status: 500 }
     );
   }

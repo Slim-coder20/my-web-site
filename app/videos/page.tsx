@@ -12,6 +12,14 @@ async function getVideos() {
     console.log("DATABASE_URL:", process.env.DATABASE_URL ? "✅ Définie" : "❌ Non définie");
     
     const videos = await prisma.video.findMany({
+      where: {
+        // Exclure la vidéo d'arrière-plan de la page d'accueil
+        NOT: {
+          videoUrl: {
+            contains: "video-album",
+          },
+        },
+      },
       select: {
         id: true,
         title: true,
