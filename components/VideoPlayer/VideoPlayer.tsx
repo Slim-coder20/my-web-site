@@ -132,8 +132,13 @@ export default function VideoPlayer({
     };
   }, [videoUrl]);
 
-  // Normaliser l'URL pour s'assurer qu'elle commence par /
-  const normalizedUrl = videoUrl.startsWith("/") ? videoUrl : `/${videoUrl}`;
+  // Normaliser l'URL : si c'est une URL absolue (http/https), l'utiliser telle quelle
+  // Sinon, si c'est une URL relative, s'assurer qu'elle commence par /
+  const normalizedUrl = videoUrl.startsWith("http://") || videoUrl.startsWith("https://")
+    ? videoUrl
+    : videoUrl.startsWith("/")
+    ? videoUrl
+    : `/${videoUrl}`;
 
   return (
     <video
