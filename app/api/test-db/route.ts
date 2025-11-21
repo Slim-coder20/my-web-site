@@ -2,12 +2,14 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function GET() {
+  // Définir dbUrl en dehors du try/catch pour qu'il soit accessible partout
+  const dbUrl = process.env.DATABASE_URL || "";
+  
   try {
     console.log("🔍 Test de connexion PostgreSQL...");
     console.log("DATABASE_URL présente:", !!process.env.DATABASE_URL);
     
     // Extraire le port de la connection string pour diagnostic
-    const dbUrl = process.env.DATABASE_URL || "";
     let portInfo = "Non disponible";
     if (dbUrl) {
       const portMatch = dbUrl.match(/:(\d+)\//);
