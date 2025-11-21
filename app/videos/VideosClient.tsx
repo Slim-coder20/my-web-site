@@ -16,13 +16,17 @@ interface Video {
 
 interface VideosClientProps {
   videos: Video[];
-  formatDuration: (seconds: number | null | undefined) => string;
 }
 
-export default function VideosClient({
-  videos,
-  formatDuration,
-}: VideosClientProps) {
+// Fonction pour formater la durée en format lisible (mm:ss)
+function formatDuration(seconds: number | null | undefined): string {
+  if (!seconds) return "";
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+}
+
+export default function VideosClient({ videos }: VideosClientProps) {
   if (videos.length === 0) {
     return (
       <div className={styles.emptyState}>

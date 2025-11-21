@@ -40,14 +40,6 @@ async function getVideos() {
   }
 }
 
-// Fonction pour formater la durée en format lisible (mm:ss)
-function formatDuration(seconds: number | null | undefined): string {
-  if (!seconds) return "";
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-  return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
-}
-
 export default async function Videos() {
   const videos = await getVideos();
   return (
@@ -58,7 +50,7 @@ export default async function Videos() {
           Découvrez les vidéos de Slim Abida et profitez de ses performances
           live.
         </p>
-        <VideosClient videos={videos} formatDuration={formatDuration} />
+        <VideosClient videos={videos} />
       </section>
       {/* Réseaux sociaux */}
       <div className={styles.socialLinks}>
