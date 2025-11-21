@@ -1,4 +1,4 @@
-// Prisma schema for Discography e‑commerce (MySQL)
+// Prisma schema for Discography e‑commerce (PostgreSQL)
 // Models: Product, Order, OrderItem, Concert, Video
 
 generator client {
@@ -7,9 +7,8 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma" // Nécessaire pour PlanetScale
+  provider = "postgresql" // Changé de MySQL à PostgreSQL pour Supabase
+  url      = env("DATABASE_URL")
 }
 
 model Product {
