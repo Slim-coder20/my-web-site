@@ -27,7 +27,6 @@ export default function PaymentVerifier() {
   const isVerifyingRef = useRef<boolean>(false);
 
   useEffect(() => {
-
     // Si pas de session_id dans l'URL, ne rien faire
     if (!sessionId) {
       return;
