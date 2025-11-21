@@ -1,5 +1,13 @@
 # 🚀 Démarrage Rapide : Migration vers Supabase Storage
 
+## Prérequis : Plan Pro Supabase
+
+⚠️ **Important** : Pour uploader des vidéos de plus de 50 MB, vous devez avoir le **plan Pro** de Supabase ($25/mois).
+
+Si vous n'avez pas encore le plan Pro :
+1. Consultez `docs/PASSER_PLAN_PRO_SUPABASE.md` pour les instructions
+2. Une fois le plan Pro activé, revenez ici
+
 ## Étape 1 : Augmenter la limite globale de fichier (IMPORTANT !)
 
 ⚠️ **Avant de créer le bucket**, il faut augmenter la limite globale :
