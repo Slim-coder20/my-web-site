@@ -1,6 +1,6 @@
 import styles from "./videos.module.css";
 import { prisma } from "@/lib/prisma";
-import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
+import VideosClient from "./VideosClient";
 
 // Forcer le rendu dynamique (SSR) pour éviter les erreurs de connexion MySQL pendant le build
 export const dynamic = "force-dynamic";
@@ -58,41 +58,7 @@ export default async function Videos() {
           Découvrez les vidéos de Slim Abida et profitez de ses performances
           live.
         </p>
-        {videos.length === 0 ? (
-          <div className={styles.emptyState}>
-            <p>Aucune vidéo disponible pour le moment.</p>
-          </div>
-        ) : (
-          <div className={styles.videosGrid}>
-            {videos.map((video) => (
-              <div className={styles.videoCard} key={video.id}>
-                <div className={styles.videoFrame}>
-                  <VideoPlayer
-                    videoUrl={video.videoUrl}
-                    videoType={video.videoType}
-                    thumbnailUrl={video.thumbnailUrl}
-                    className={styles.video}
-                    controls
-                    preload="metadata"
-                  />
-                </div>
-                <div className={styles.videoInfo}>
-                  <h3 className={styles.videoTitle}>{video.title}</h3>
-                  {video.description && (
-                    <p className={styles.videoDescription}>
-                      {video.description}
-                    </p>
-                  )}
-                  {video.duration && (
-                    <span className={styles.videoDuration}>
-                      Durée: {formatDuration(video.duration)}
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+        <VideosClient videos={videos} formatDuration={formatDuration} />
       </section>
       {/* Réseaux sociaux */}
       <div className={styles.socialLinks}>
