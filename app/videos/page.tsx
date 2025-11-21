@@ -42,6 +42,11 @@ async function getVideos() {
 
 export default async function Videos() {
   const videos = await getVideos();
+  // Sérialiser les dates pour éviter les problèmes de sérialisation
+  const serializedVideos = videos.map((video) => ({
+    ...video,
+    createdAt: video.createdAt.toISOString(),
+  }));
   return (
     <div className={styles.videosContainer}>
       <section className={styles.videosSection}>
@@ -50,7 +55,7 @@ export default async function Videos() {
           Découvrez les vidéos de Slim Abida et profitez de ses performances
           live.
         </p>
-        <VideosClient videos={videos} />
+        <VideosClient videos={serializedVideos} />
       </section>
       {/* Réseaux sociaux */}
       <div className={styles.socialLinks}>

@@ -11,7 +11,7 @@ interface Video {
   videoUrl: string;
   videoType: string | null;
   thumbnailUrl: string | null;
-  createdAt: Date;
+  createdAt: string; // Sérialisé en ISO string
 }
 
 interface VideosClientProps {
