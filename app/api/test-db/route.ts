@@ -38,8 +38,7 @@ export async function GET() {
     const productCount = await prisma.product.count();
     console.log(`✅ Nombre de produits: ${productCount}`);
 
-    // Extraire le port pour l'afficher dans la réponse
-    const dbUrl = process.env.DATABASE_URL || "";
+    // Extraire le port pour l'afficher dans la réponse (réutiliser dbUrl déjà défini)
     let portUsed = "unknown";
     if (dbUrl) {
       const portMatch = dbUrl.match(/:(\d+)\//);
@@ -56,13 +55,12 @@ export async function GET() {
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
-    console.error("❌ Erreur de connexion MySQL:", error);
+    console.error("❌ Erreur de connexion PostgreSQL:", error);
 
     const errorMessage = error instanceof Error ? error.message : String(error);
     const errorStack = error instanceof Error ? error.stack : undefined;
 
-    // Extraire le port pour le diagnostic
-    const dbUrl = process.env.DATABASE_URL || "";
+    // Extraire le port pour le diagnostic (réutiliser dbUrl déjà défini)
     let portUsed = "unknown";
     if (dbUrl) {
       const portMatch = dbUrl.match(/:(\d+)\//);
