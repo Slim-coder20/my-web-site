@@ -60,6 +60,7 @@ id_rsa.pub
 *.pem
 Stripe
 "Stripe "
+db.txt
 
 # Dossiers de déploiement (temporaires)
 /deployment-package/
