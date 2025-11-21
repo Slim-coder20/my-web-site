@@ -41,6 +41,7 @@ export default function Header() {
                 href={link.href}
                 className={`${styles.navLink} ${isActive ? styles.active : ""}`}
                 onClick={closeMenu}
+                prefetch={false}
               >
                 {link.label}
               </Link>

@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   // Note: Les configurations o2switch (distDir: "build", workerThreads: false, cpus: 1)
   // ont été retirées car Vercel gère automatiquement le build et n'a pas ces limitations
 
+  // Désactiver le prefetch pour éviter les erreurs 404
+  experimental: {
+    optimizePackageImports: ["@prisma/client"],
+  },
+
   images: {
     // Vercel optimise automatiquement les images, mais on garde unoptimized: true
     // pour les images locales qui ne peuvent pas être optimisées

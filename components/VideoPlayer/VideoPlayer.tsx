@@ -24,7 +24,7 @@ export default function VideoPlayer({
   autoPlay = false,
   loop = false,
   muted = false,
-      playsInline = false,
+  playsInline = false,
 }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -41,7 +41,9 @@ export default function VideoPlayer({
       // Timeout de 30 secondes pour détecter si la vidéo ne se charge pas
       loadTimeout = setTimeout(() => {
         if (video.readyState < 2) {
-          console.warn(`⏱️ Timeout: La vidéo ${videoUrl} ne se charge pas après 30 secondes`);
+          console.warn(
+            `⏱️ Timeout: La vidéo ${videoUrl} ne se charge pas après 30 secondes`
+          );
         }
       }, 30000);
     };
@@ -72,7 +74,11 @@ export default function VideoPlayer({
         const duration = video.duration;
         if (duration > 0) {
           const percentLoaded = (bufferedEnd / duration) * 100;
-          console.log(`📊 Progression: ${percentLoaded.toFixed(1)}% chargé pour ${videoUrl}`);
+          console.log(
+            `📊 Progression: ${percentLoaded.toFixed(
+              1
+            )}% chargé pour ${videoUrl}`
+          );
         }
       }
     };
