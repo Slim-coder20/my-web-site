@@ -11,23 +11,39 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 
 export default function PaymentVerifier() {
   const searchParams = useSearchParams();
+  // Extraire le sessionId une seule fois pour éviter les re-rendus
+  const sessionId = searchParams.get("session_id");
   const [status, setStatus] = useState<"checking" | "success" | "error" | null>(
     null
   );
   const [message, setMessage] = useState<string>("");
+  // Utiliser un ref pour tracker les session_id déjà vérifiés et éviter les vérifications multiples
+  const verifiedSessionIdsRef = useRef<Set<string>>(new Set());
+  const isVerifyingRef = useRef<boolean>(false);
 
   useEffect(() => {
-    const sessionId = searchParams.get("session_id");
 
     // Si pas de session_id dans l'URL, ne rien faire
     if (!sessionId) {
       return;
     }
+
+    // Éviter de vérifier plusieurs fois le même session_id
+    if (
+      verifiedSessionIdsRef.current.has(sessionId) ||
+      isVerifyingRef.current
+    ) {
+      return;
+    }
+
+    // Marquer comme en cours de vérification
+    isVerifyingRef.current = true;
+    verifiedSessionIdsRef.current.add(sessionId);
 
     // Vérifier le statut du paiement
     const verifyPayment = async () => {
@@ -47,20 +63,27 @@ export default function PaymentVerifier() {
 
         if (response.ok && data.status === "paid") {
           setStatus("success");
-          setMessage("Paiement confirmé ! Vous recevrez un email de confirmation.");
+          setMessage(
+            "Paiement confirmé ! Vous recevrez un email de confirmation."
+          );
         } else {
           setStatus("error");
-          setMessage(data.message || "Erreur lors de la vérification du paiement");
+          setMessage(
+            data.message || "Erreur lors de la vérification du paiement"
+          );
         }
       } catch (error) {
         console.error("Erreur lors de la vérification du paiement:", error);
         setStatus("error");
         setMessage("Erreur lors de la vérification du paiement");
+      } finally {
+        // Marquer comme terminé
+        isVerifyingRef.current = false;
       }
     };
 
     verifyPayment();
-  }, [searchParams]);
+  }, [sessionId]); // Dépendre uniquement du sessionId, pas de searchParams
 
   // Masquer automatiquement le message de succès après 3 secondes
   useEffect(() => {
@@ -113,4 +136,3 @@ export default function PaymentVerifier() {
     </div>
   );
 }
-

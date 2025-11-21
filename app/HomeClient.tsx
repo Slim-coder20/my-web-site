@@ -67,7 +67,7 @@ export default function HomeClient({
       }
       // Marquer l'URL actuelle pour éviter les rechargements en boucle
       currentUrlRef.current = backgroundVideoUrl;
-      
+
       // Utiliser un timeout pour éviter les boucles de re-rendu
       const timeoutId = setTimeout(() => {
         video.load();
@@ -110,7 +110,10 @@ export default function HomeClient({
               className={styles.heroVideo}
               preload="auto"
             >
-              <source src={backgroundVideoUrl} type={backgroundVideoType || "video/mp4"} />
+              <source
+                src={backgroundVideoUrl}
+                type={backgroundVideoType || "video/mp4"}
+              />
             </video>
             <div className={styles.videoOverlay}></div>
           </div>
@@ -211,4 +214,3 @@ export default function HomeClient({
     </div>
   );
 }
-
