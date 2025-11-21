@@ -71,6 +71,18 @@ export default async function Videos() {
                     className={styles.video}
                     preload="metadata"
                     poster={video.thumbnailUrl || undefined}
+                    onError={(e) => {
+                      console.error(
+                        `Erreur lors du chargement de la vidéo ${video.id}:`,
+                        video.videoUrl
+                      );
+                      // Afficher un message d'erreur visuel si nécessaire
+                      const videoElement = e.currentTarget;
+                      if (videoElement.parentElement) {
+                        videoElement.parentElement.style.backgroundColor =
+                          "#1a1a1a";
+                      }
+                    }}
                   >
                     <source
                       src={video.videoUrl}

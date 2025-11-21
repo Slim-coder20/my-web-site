@@ -6,6 +6,9 @@ import Footer from "@/components/Footer/Footer";
 export const metadata: Metadata = {
   title: "Slim Abida ",
   description: "Site officiel de Slim Abida Project - Jazz Fusion",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

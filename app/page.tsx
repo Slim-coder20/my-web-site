@@ -1,9 +1,40 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleError = () => {
+      console.warn("La vidéo en arrière-plan n'a pas pu être chargée");
+      // Masquer la vidéo en cas d'erreur
+      if (video.parentElement) {
+        video.parentElement.style.display = "none";
+      }
+    };
+
+    const handleCanPlay = () => {
+      // La vidéo est prête à être lue
+      video.play().catch((error) => {
+        console.warn("Erreur lors de la lecture de la vidéo:", error);
+      });
+    };
+
+    video.addEventListener("error", handleError);
+    video.addEventListener("canplay", handleCanPlay);
+
+    return () => {
+      video.removeEventListener("error", handleError);
+      video.removeEventListener("canplay", handleCanPlay);
+    };
+  }, []);
+
   return (
     <div className={styles.homeContainer}>
       {/* Section Hero */}
@@ -25,7 +56,15 @@ export default function Home() {
         </div>
         {/* Vidéo en arrière-plan si disponible */}
         <div className={styles.videoContainer}>
-          <video autoPlay loop muted playsInline className={styles.heroVideo}>
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className={styles.heroVideo}
+            preload="auto"
+          >
             <source src="/videos/video-album.mp4" type="video/mp4" />
           </video>
           <div className={styles.videoOverlay}></div>
