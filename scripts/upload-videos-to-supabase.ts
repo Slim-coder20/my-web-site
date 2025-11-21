@@ -10,6 +10,14 @@
  * npx tsx scripts/upload-videos-to-supabase.ts
  */
 
+// Charger les variables d'environnement depuis .env.local
+import { config } from "dotenv";
+import { resolve } from "path";
+
+// Charger .env.local en priorité, puis .env
+config({ path: resolve(process.cwd(), ".env.local") });
+config({ path: resolve(process.cwd(), ".env") });
+
 import { createClient } from "@supabase/supabase-js";
 import { readdir, readFile } from "fs/promises";
 import { join } from "path";

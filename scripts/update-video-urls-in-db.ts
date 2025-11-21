@@ -6,11 +6,19 @@
  * 
  * Prérequis :
  * 1. Avoir uploadé les vidéos vers Supabase Storage
- * 2. Avoir DATABASE_URL configurée dans .env.local
+ * 2. Avoir DATABASE_URL et NEXT_PUBLIC_SUPABASE_URL configurées dans .env.local
  * 
  * Usage :
  * npx tsx scripts/update-video-urls-in-db.ts
  */
+
+// Charger les variables d'environnement depuis .env.local
+import { config } from "dotenv";
+import { resolve } from "path";
+
+// Charger .env.local en priorité, puis .env
+config({ path: resolve(process.cwd(), ".env.local") });
+config({ path: resolve(process.cwd(), ".env") });
 
 import { PrismaClient } from "@prisma/client";
 
