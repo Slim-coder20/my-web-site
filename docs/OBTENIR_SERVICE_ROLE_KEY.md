@@ -16,6 +16,7 @@ Dans la page **Settings → API**, vous verrez plusieurs sections :
 Vous verrez plusieurs clés :
 
 1. **anon public** (clé publique, peut être exposée côté client)
+
    - ⚠️ Ne pas utiliser pour les scripts d'upload
 
 2. **service_role secret** (clé secrète, NE JAMAIS exposer publiquement)
@@ -33,6 +34,7 @@ Vous verrez plusieurs clés :
 ## Format de la clé
 
 La clé ressemble à quelque chose comme :
+
 ```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqcGZlbGpqend1bnlwbmcdG1maiIsInJvbGUiOiJzZXJ2aWNlX3JvbGUiLCJpYXQiOjE2OTk...
 ```
@@ -60,4 +62,3 @@ C'est une très longue chaîne de caractères (JWT token).
 2. Faites défiler vers le bas de la page
 3. La section "service_role" peut être en bas
 4. Si vous ne la voyez pas, vous devrez peut-être cliquer sur "Reveal" ou "Show"
-
