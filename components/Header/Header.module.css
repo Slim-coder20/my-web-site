@@ -66,6 +66,28 @@
   opacity: 0.8;
 }
 
+/* Bouton de changement de langue */
+.languageButton {
+  color: #ffffff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  margin-left: 1rem;
+}
+
+.languageButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
 /* Lien actif avec soulignement
 .navLink.active {
   text-decoration: underline;
@@ -137,9 +159,13 @@
     backdrop-filter: blur(10px);
     flex-direction: column;
     padding: 2rem;
+    padding-bottom: 3rem;
     gap: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    z-index: 1000;
   }
 
   /* Afficher le menu quand ouvert */
@@ -152,5 +178,52 @@
     padding: 0.75rem 0;
     width: 100%;
     text-align: center;
+  }
+
+  .mobileSeparator {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.2) 80%,
+      transparent 100%
+    );
+    margin: 1.5rem 0 1rem 0;
+    flex-shrink: 0;
+  }
+
+  .languageButton {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    padding: 0.875rem 1.5rem !important;
+    font-size: 0.9rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    z-index: 10;
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    flex-shrink: 0;
+    order: 999;
+  }
+
+  .languageButton:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
   }
 }

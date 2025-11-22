@@ -1,8 +1,12 @@
+"use client";
+
 import styles from "./news.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function News() {
+  const { t } = useLanguage();
   return (
     <div className={styles.newsContainer}>
       <section className={styles.newsSection}>
@@ -20,40 +24,27 @@ export default function News() {
 
         {/* Contenu texte */}
         <div className={styles.contentWrapper}>
-          <h1 className={styles.title}>Contrast - Nouvel Album</h1>
+          <h1 className={styles.title}>{t.news.title}</h1>
 
           <div className={styles.bioText}>
             <p>
-              Dans un monde où tout s’oppose et se complète, CONTRAST prend vie.
-              Après Fréquences Basses (2020) et Asymétrie (2022), Slim Abida
-              poursuit son exploration musicale, façonnant un univers où la
-              beauté naît de la mise en évidence des contrastes qui jalonnent
-              notre monde. Cet album est une immersion dans les dualités qui
-              rythment nos existences : l’ombre et la lumière, l’amour et la
-              haine, l’espoir et le désespoir, la justice et l’injustice. Chaque
-              morceau est une facette d’un prisme émotionnel, une onde sonore
-              oscillant entre harmonie et chaos, entre douceur et brutalité.
-              Plus qu’un simple album, CONTRAST est une invitation à ressentir
-              la complexité du monde au-delà des jugements binaires. Il ne
-              tranche pas entre le bien et le mal, mais révèle toute la richesse
-              et la profondeur sousjacentes. Il est ce point d’équilibre fragile
-              entre les extrêmes, une quête d’harmonie au sein du tumulte.
+              {t.news.description}
             </p>
           </div>
 
           {/* Bouton vers la campagne de crowdfunding */}
           <div className={styles.buttonWrapper}>
             <Link href="https://fr.ulule.com/contrast-crowfunding/coming-soon " className={styles.musicButton} target="_blank">
-              Soutenir le projet →
+              {t.news.supportProject}
             </Link>
             <Link href="/discographie" className={styles.musicButton}>
-              Découvrir la discographie →
+              {t.news.discoverDiscography}
             </Link>
           </div>
 
           {/* Réseaux sociaux */}
           <div className={styles.socialLinks}>
-            <h2 className={styles.socialTitle}>Suivez-moi</h2>
+            <h2 className={styles.socialTitle}>{t.news.followMe}</h2>
             <div className={styles.socialIcons}>
               <a
                 href="https://www.instagram.com/slimabidaproject/"

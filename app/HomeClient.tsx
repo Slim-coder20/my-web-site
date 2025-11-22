@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import styles from "./page.module.css";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface HomeClientProps {
   backgroundVideoUrl: string | null;
@@ -13,6 +14,7 @@ export default function HomeClient({
   backgroundVideoUrl,
   backgroundVideoType,
 }: HomeClientProps) {
+  const { t } = useLanguage();
   const videoRef = useRef<HTMLVideoElement>(null);
   const currentUrlRef = useRef<string | null>(null);
   const nextSectionRef = useRef<HTMLElement>(null);
@@ -98,17 +100,17 @@ export default function HomeClient({
       {/* Section Hero */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>Slim Abida</h1>
+          <h1 className={styles.heroTitle}>{t.home.title}</h1>
           <h3 className={styles.heroSubtitle2}>
-            Bassiste / Compositeur / Arrangeur
+            {t.home.subtitle}
           </h3>
-          <p className={styles.heroSubtitle}>Contrast Nouvel album </p>
+          <p className={styles.heroSubtitle}>{t.home.subtitle2}</p>
           <div className={styles.heroButtons}>
             <Link href="/discographie" className={styles.primaryButton}>
-              Découvrir la Musique
+              {t.home.discoverMusic}
             </Link>
             <Link href="/concerts" className={styles.secondaryButton}>
-              Prochains Concerts
+              {t.home.upcomingConcerts}
             </Link>
           </div>
         </div>
@@ -159,22 +161,20 @@ export default function HomeClient({
       {/* Section News */}
       <section ref={nextSectionRef} className={styles.section}>
         <div className={styles.sectionContent}>
-          <h2 className={styles.sectionTitle}>News </h2>
+          <h2 className={styles.sectionTitle}>{t.home.news.title}</h2>
           <p className={styles.sectionText}>
-            Découvrez les dernières nouvelles de Slim Abida. Contrast nouvel
-            album N&apos;hésitez pas à nous suivre sur les réseaux sociaux et à
-            nous soutenir en contibuant à notre Crowdfunding.
+            {t.home.news.description}
           </p>
           <div className={styles.heroButtons}>
             <Link href="/news" className={styles.primaryButton}>
-              Voir les news →
+              {t.home.news.seeNews}
             </Link>
             <Link
               href="https://fr.ulule.com/contrast-crowfunding/coming-soon "
               className={styles.secondaryButton}
               target="_blank"
             >
-              Soutenir le projet →
+              {t.home.news.supportProject}
             </Link>
           </div>
         </div>
@@ -182,14 +182,12 @@ export default function HomeClient({
       {/* Section About Preview */}
       <section className={styles.section}>
         <div className={styles.sectionContent}>
-          <h2 className={styles.sectionTitle}>À Propos</h2>
+          <h2 className={styles.sectionTitle}>{t.home.about.title}</h2>
           <p className={styles.sectionText}>
-            Découvrez l&apos;univers musical unique de Slim Abida, où le jazz
-            rencontre la fusion dans une expérience sonore captivante. Une
-            exploration artistique qui transcende les genres et les frontières.
+            {t.home.about.description}
           </p>
           <Link href="/about" className={styles.linkButton}>
-            En savoir plus →
+            {t.home.about.learnMore}
           </Link>
         </div>
       </section>
@@ -197,27 +195,24 @@ export default function HomeClient({
       {/* Section Music Preview */}
       <section className={styles.section}>
         <div className={styles.sectionContent}>
-          <h2 className={styles.sectionTitle}>Musique</h2>
+          <h2 className={styles.sectionTitle}>{t.home.music.title}</h2>
           <p className={styles.sectionText}>
-            Plongez dans la discographie de Slim Abida et explorez des
-            compositions originales qui mêlent harmonieusement les influences
-            jazz et fusion.
+            {t.home.music.description}
           </p>
           <Link href="/discographie" className={styles.linkButton}>
-            Écouter maintenant →
+            {t.home.music.listenNow}
           </Link>
         </div>
       </section>
       {/* Section vidéos Preview */}
       <section className={styles.section}>
         <div className={styles.sectionContent}>
-          <h2 className={styles.sectionTitle}>Vidéos</h2>
+          <h2 className={styles.sectionTitle}>{t.home.videos.title}</h2>
           <p className={styles.sectionText}>
-            Découvrez les vidéos de Slim Abida et profitez de ses performances
-            live.
+            {t.home.videos.description}
           </p>
           <Link href="/videos" className={styles.linkButton}>
-            Voir les vidéos →
+            {t.home.videos.seeVideos}
           </Link>
         </div>
       </section>
@@ -225,25 +220,24 @@ export default function HomeClient({
       {/* Section Concerts Preview */}
       <section className={styles.section}>
         <div className={styles.sectionContent}>
-          <h2 className={styles.sectionTitle}>Concerts</h2>
+          <h2 className={styles.sectionTitle}>{t.home.concerts.title}</h2>
           <p className={styles.sectionText}>
-            Ne manquez pas les prochaines dates de concert et vivez
-            l&apos;expérience live de Slim Abida Project.
+            {t.home.concerts.description}
           </p>
           <Link href="/concerts" className={styles.linkButton}>
-            Voir les dates →
+            {t.home.concerts.seeDates}
           </Link>
         </div>
       </section>
       {/* Section Formation Preview */}
       <section className={styles.section}>
         <div className={styles.sectionContent}>
-          <h2 className={styles.sectionTitle}>Formation</h2>
+          <h2 className={styles.sectionTitle}>{t.home.formation.title}</h2>
           <p className={styles.sectionText}>
-            Découvrez les cours de formation de Slim Abida.
+            {t.home.formation.description}
           </p>
           <Link href="/pedago" className={styles.linkButton}>
-            Voir les cours →
+            {t.home.formation.seeCourses}
           </Link>
         </div>
       </section>

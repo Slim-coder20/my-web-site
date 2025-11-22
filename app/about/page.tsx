@@ -1,8 +1,12 @@
+"use client";
+
 import styles from "./about.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function About() {
+  const { t } = useLanguage();
   return (
     <div className={styles.aboutContainer}>
       <section className={styles.aboutSection}>
@@ -20,40 +24,28 @@ export default function About() {
 
         {/* Contenu texte */}
         <div className={styles.contentWrapper}>
-          <h1 className={styles.title}>Slim Abida</h1>
+          <h1 className={styles.title}>{t.about.title}</h1>
 
           <div className={styles.bioText}>
             <p>
-              Slim Abida est un bassiste et compositeur tunisien, connu pour son
-              style éclectique, influencé par Richard Bona, Marcus Miller et
-              Ibrahim Maalouf. En 2002, il co-fonde le groupe Melmoth un projet
-              de metal tunisien qui réussi à le faire jouer à l’international
-              (Algérie, Maroc). En 2005, il participe au projet Goultrah Sound
-              System, fusion de Gnawa, dub et reggae, qui rencontre un franc
-              succès. Il collabore avec des artistes de renommée internationale
-              parmi lesquels Naïssam Jalal, Amine Bouhafa Emel Mathlouthi, et
-              Sabry Mosbah. En 2016, avec Jazz Oil, groupe de jazz-world dont il
-              est le fondateur, il sort l’album Lamma. En 2020, il se lance en
-              solo et sort l’album Fréquences Basses, suivi de Asymétrie en
-              2022. Actuellement, il travaille sur son troisième album solo,
-              Contrast.
+              {t.about.bio}
             </p>
           </div>
 
           {/* Bouton vers la musique */}
           <div className={styles.buttonWrapper}>
             <Link href="/discographie" className={styles.musicButton}>
-              Découvrir la Musique →
+              {t.about.discoverMusic}
             </Link>
             {/* Bouton vers les vidéos */}
             <Link href="/videos" className={styles.musicButton}>
-              Voir les vidéos →
+              {t.about.seeVideos}
             </Link>
           </div>
         
           {/* Réseaux sociaux */}
           <div className={styles.socialLinks}>
-            <h2 className={styles.socialTitle}>Suivez-moi</h2>
+            <h2 className={styles.socialTitle}>{t.about.followMe}</h2>
             <div className={styles.socialIcons}>
               <a
                 href="https://www.instagram.com/slimabidaproject/"

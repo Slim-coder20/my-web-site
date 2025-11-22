@@ -1,28 +1,30 @@
+"use client";
+
 // Page de formation pour les bassistes
 import Link from "next/link";
 import styles from "./pedago.module.css";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Pedago() {
+  const { t } = useLanguage();
+  
   const courses = [
     {
       id: 1,
-      title: "Basse Instrument",
-      description:
-        "Apprenez la basse électrique avec Slim Abida. Cours personnalisés adaptés à votre niveau, de débutant à avancé. Technique, groove, harmonie et improvisation.",
+      title: t.pedago.courses.bass.title,
+      description: t.pedago.courses.bass.description,
       icon: "🎸",
     },
     {
       id: 2,
-      title: "Arrangement",
-      description:
-        "Maîtrisez l'art de l'arrangement musical. Apprenez à orchestrer vos compositions, créer des textures sonores et développer votre identité musicale.",
+      title: t.pedago.courses.arrangement.title,
+      description: t.pedago.courses.arrangement.description,
       icon: "🎼",
     },
     {
       id: 3,
-      title: "Composition",
-      description:
-        "Développez vos compétences en composition. De l'idée initiale à la réalisation complète, explorez les techniques de création musicale et d'écriture.",
+      title: t.pedago.courses.composition.title,
+      description: t.pedago.courses.composition.description,
       icon: "✍️",
     },
   ];
@@ -30,10 +32,9 @@ export default function Pedago() {
   return (
     <div className={styles.pedagoContainer}>
       <section className={styles.pedagoSection}>
-        <h1 className={styles.title}>Formation</h1>
+        <h1 className={styles.title}>{t.pedago.title}</h1>
         <p className={styles.description}>
-          Découvrez les cours de formation de Slim Abida. Des cours
-          personnalisés pour développer vos compétences musicales.
+          {t.pedago.description}
         </p>
         <div className={styles.coursesGrid}>
           {courses.map((course) => (
@@ -43,7 +44,7 @@ export default function Pedago() {
                 <h2 className={styles.courseTitle}>{course.title}</h2>
                 <p className={styles.courseDescription}>{course.description}</p>
                 <Link href="/contact" className={styles.contactButton}>
-                  Me contacter
+                  {t.pedago.contactMe}
                 </Link>
               </div>
             </div>

@@ -4,19 +4,25 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import styles from "./Header.module.css";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Header() {
   const pathname = usePathname();
+  const { language, setLanguage, t } = useLanguage();
 
   const navLinks = [
-    { href: "/", label: "ACCUEIL" },
-    { href: "/about", label: "BIO" },
-    { href: "/discographie", label: "MUSIC" },
-    { href: "/videos", label: "VIDEOS" },
-    { href: "/concerts", label: "CONCERTS" },
-    { href: "/pedago", label: "PEDAGO" },
-    { href: "/contact", label: "CONTACT" },
+    { href: "/", label: t.nav.home },
+    { href: "/about", label: t.nav.about },
+    { href: "/discographie", label: t.nav.music },
+    { href: "/videos", label: t.nav.videos },
+    { href: "/concerts", label: t.nav.concerts },
+    { href: "/pedago", label: t.nav.pedago },
+    { href: "/contact", label: t.nav.contact },
   ];
+
+  const toggleLanguage = () => {
+    setLanguage(language === "fr" ? "en" : "fr");
+  };
 
   // Création du menu burger pour les petits écrans //
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,6 +53,22 @@ export default function Header() {
               </Link>
             );
           })}
+          {/* Séparateur visuel pour mobile */}
+          <div className={styles.mobileSeparator}></div>
+          {/* Bouton de changement de langue */}
+          <button
+            onClick={() => {
+              toggleLanguage();
+              // Ne pas fermer le menu pour permettre de voir le changement
+            }}
+            className={styles.languageButton}
+            aria-label={`Switch to ${
+              language === "fr" ? "English" : "Français"
+            }`}
+            title={`Switch to ${language === "fr" ? "English" : "Français"}`}
+          >
+            {language === "fr" ? "EN" : "FR"}
+          </button>
         </nav>
         {/* Bouton burger pour les petits écrans */}
         <button
