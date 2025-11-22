@@ -1,111 +1,184 @@
+/**
+ * ============================================================================
+ * SYSTÈME DE TRADUCTION - FICHIER CENTRALISÉ
+ * ============================================================================
+ *
+ * Ce fichier contient toutes les traductions de l'application.
+ * Il définit la structure TypeScript des traductions et les textes en FR/EN.
+ *
+ * Utilisation dans les composants :
+ *   const { t } = useLanguage();
+ *   <h1>{t.home.title}</h1>
+ */
+
+// ============================================================================
+// TYPES ET INTERFACES
+// ============================================================================
+
+/**
+ * Langues disponibles dans l'application
+ * Pour ajouter une nouvelle langue, ajoutez-la ici et dans l'objet translations
+ */
 export type Language = "fr" | "en";
 
+/**
+ * Interface TypeScript définissant la structure complète des traductions
+ * Cette interface garantit que toutes les traductions ont la même structure
+ * et permet l'autocomplétion dans l'IDE
+ */
 export interface Translations {
+  // ========================================================================
+  // NAVIGATION - Textes utilisés dans le menu de navigation (Header)
+  // ========================================================================
   nav: {
-    home: string;
-    about: string;
-    music: string;
-    videos: string;
-    concerts: string;
-    pedago: string;
-    contact: string;
+    home: string; // "ACCUEIL" / "HOME"
+    about: string; // "BIO" / "BIO"
+    music: string; // "MUSIC" / "MUSIC"
+    videos: string; // "VIDEOS" / "VIDEOS"
+    concerts: string; // "CONCERTS" / "CONCERTS"
+    pedago: string; // "PEDAGO" / "PEDAGO"
+    contact: string; // "CONTACT" / "CONTACT"
   };
+
+  // ========================================================================
+  // PAGE D'ACCUEIL - Textes de la section hero et des cartes
+  // ========================================================================
   home: {
-    title: string;
-    subtitle: string;
-    subtitle2: string;
-    album: string;
-    discoverMusic: string;
-    upcomingConcerts: string;
+    title: string; // Titre principal de la page d'accueil
+    subtitle: string; // Sous-titre (rôle de l'artiste)
+    subtitle2: string; // Deuxième sous-titre (album)
+    album: string; // Nom de l'album
+    discoverMusic: string; // Texte du bouton "Découvrir la Musique"
+    upcomingConcerts: string; // Texte du bouton "Prochains Concerts"
+
+    // Sous-sections pour les cartes de la page d'accueil
     news: {
-      title: string;
-      description: string;
-      seeNews: string;
-      supportProject: string;
+      title: string; // Titre de la carte News
+      description: string; // Description de la carte News
+      seeNews: string; // Lien "Voir les news →"
+      supportProject: string; // Bouton "Soutenir le projet →"
     };
     about: {
-      title: string;
-      description: string;
-      learnMore: string;
+      title: string; // Titre de la carte À Propos
+      description: string; // Description de la carte À Propos
+      learnMore: string; // Lien "En savoir plus →"
     };
     music: {
-      title: string;
-      description: string;
-      listenNow: string;
+      title: string; // Titre de la carte Musique
+      description: string; // Description de la carte Musique
+      listenNow: string; // Bouton "Écouter maintenant →"
     };
     videos: {
-      title: string;
-      description: string;
-      seeVideos: string;
+      title: string; // Titre de la carte Vidéos
+      description: string; // Description de la carte Vidéos
+      seeVideos: string; // Lien "Voir les vidéos →"
     };
     concerts: {
-      title: string;
-      description: string;
-      seeDates: string;
+      title: string; // Titre de la carte Concerts
+      description: string; // Description de la carte Concerts
+      seeDates: string; // Lien "Voir les dates →"
     };
     formation: {
-      title: string;
-      description: string;
-      seeCourses: string;
+      title: string; // Titre de la carte Formation
+      description: string; // Description de la carte Formation
+      seeCourses: string; // Lien "Voir les cours →"
     };
   };
+
+  // ========================================================================
+  // PAGE NEWS - Textes de la page dédiée aux actualités
+  // ========================================================================
   news: {
-    title: string;
-    description: string;
-    supportProject: string;
-    discoverDiscography: string;
-    followMe: string;
+    title: string; // Titre de la page (ex: "Contrast - Nouvel Album")
+    description: string; // Description complète de l'actualité
+    supportProject: string; // Bouton "Soutenir le projet →"
+    discoverDiscography: string; // Bouton "Découvrir la discographie →"
+    followMe: string; // Titre de la section réseaux sociaux
   };
+
+  // ========================================================================
+  // PAGE ABOUT (BIO) - Textes de la page biographique
+  // ========================================================================
   about: {
-    title: string;
-    bio: string;
-    discoverMusic: string;
-    seeVideos: string;
-    followMe: string;
+    title: string; // Titre de la page (nom de l'artiste)
+    bio: string; // Biographie complète de l'artiste
+    discoverMusic: string; // Bouton "Découvrir la Musique →"
+    seeVideos: string; // Bouton "Voir les vidéos →"
+    followMe: string; // Titre de la section réseaux sociaux
   };
+
+  // ========================================================================
+  // PAGE PEDAGO - Textes de la page de formation
+  // ========================================================================
   pedago: {
-    title: string;
-    description: string;
+    title: string; // Titre de la page "Formation"
+    description: string; // Description générale des cours
     courses: {
+      // Cours de basse
       bass: {
-        title: string;
-        description: string;
+        title: string; // "Basse Instrument"
+        description: string; // Description du cours de basse
       };
+      // Cours d'arrangement
       arrangement: {
-        title: string;
-        description: string;
+        title: string; // "Arrangement"
+        description: string; // Description du cours d'arrangement
       };
+      // Cours de composition
       composition: {
-        title: string;
-        description: string;
+        title: string; // "Composition"
+        description: string; // Description du cours de composition
       };
     };
-    contactMe: string;
+    contactMe: string; // Bouton "Me contacter" sur chaque carte de cours
   };
+
+  // ========================================================================
+  // FORMULAIRE DE CONTACT - Tous les textes du formulaire
+  // ========================================================================
   contact: {
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-    send: string;
-    sending: string;
+    // Labels des champs du formulaire
+    name: string; // "Nom" / "Name"
+    email: string; // "Email" / "Email"
+    subject: string; // "Sujet" / "Subject"
+    message: string; // "Message" / "Message"
+
+    // Bouton d'envoi
+    send: string; // "Envoyer" / "Send"
+    sending: string; // "Envoi en cours..." / "Sending..." (état de chargement)
+
+    // Options du select "Sujet"
     subjectOptions: {
-      contact: string;
-      collaboration: string;
-      concert: string;
-      press: string;
-      training: string;
-      other: string;
+      contact: string; // "Demande de contact" / "Contact request"
+      collaboration: string; // "Demande de collaboration" / "Collaboration request"
+      concert: string; // "Demande de concert" / "Concert request"
+      press: string; // "Demande de presse" / "Press request"
+      training: string; // "Demande de formation" / "Training request"
+      other: string; // "Autre" / "Other"
     };
+
+    // Messages de retour (succès/erreur)
     messages: {
-      success: string;
-      error: string;
-      errorGeneric: string;
+      success: string; // Message de succès après envoi
+      error: string; // Message d'erreur spécifique
+      errorGeneric: string; // Message d'erreur générique
     };
   };
 }
 
+// ============================================================================
+// OBJET DES TRADUCTIONS
+// ============================================================================
+
+/**
+ * Objet contenant toutes les traductions pour chaque langue
+ * Structure : translations[langue][section][clé]
+ * Exemple : translations.fr.home.title
+ */
 export const translations: Record<Language, Translations> = {
+  // ========================================================================
+  // TRADUCTIONS FRANÇAISES
+  // ========================================================================
   fr: {
     nav: {
       home: "ACCUEIL",
@@ -221,6 +294,10 @@ export const translations: Record<Language, Translations> = {
       },
     },
   },
+
+  // ========================================================================
+  // TRADUCTIONS ANGLAISES
+  // ========================================================================
   en: {
     nav: {
       home: "HOME",
