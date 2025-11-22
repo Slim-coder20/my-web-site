@@ -207,7 +207,7 @@
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 4;
+  z-index: 10;
   background: rgba(255, 255, 255, 0.1);
   border: none;
   border-radius: 50%;
@@ -282,12 +282,19 @@
   .heroButtons {
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 2;
   }
 
   .primaryButton,
   .secondaryButton {
     width: 100%;
     max-width: 280px;
+  }
+
+  .scrollArrow {
+    z-index: 10;
+    bottom: 1.5rem;
   }
 
   .section {
@@ -324,6 +331,7 @@
 
   .scrollArrow {
     bottom: 1rem;
+    z-index: 10;
   }
 
   .scrollArrow svg {
