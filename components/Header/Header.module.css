@@ -49,6 +49,16 @@
   padding: 0;
 }
 
+/* Conteneur pour les liens de navigation - Desktop */
+.navLinksContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
 .navLink {
   color: #ffffff;
   text-decoration: none;
@@ -66,7 +76,7 @@
   opacity: 0.8;
 }
 
-/* Bouton de changement de langue */
+/* Bouton de changement de langue - Desktop */
 .languageButton {
   color: #ffffff;
   background: transparent;
@@ -80,6 +90,8 @@
   transition: all 0.3s ease;
   border-radius: 4px;
   margin-left: 1rem;
+  /* Masquer sur mobile */
+  display: block;
 }
 
 .languageButton:hover {
@@ -148,6 +160,14 @@
     display: flex;
   }
 
+  /* Conteneur pour les liens de navigation - Mobile */
+  .navLinksContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* Sur mobile, le conteneur sera scrollable quand le menu est ouvert */
+  }
+
   /* Cacher le menu par défaut sur mobile */
   .nav {
     display: none;
@@ -158,19 +178,65 @@
     background-color: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(10px);
     flex-direction: column;
-    padding: 2rem;
-    padding-bottom: 3rem;
-    gap: 1.5rem;
+    padding: 2rem 2rem 0 2rem; /* Pas de padding-bottom, géré par le bouton */
+    gap: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     max-height: calc(100vh - 100px);
-    overflow-y: auto;
+    overflow: hidden; /* Pas de scroll sur le nav lui-même */
     z-index: 1000;
+    align-items: stretch;
   }
 
   /* Afficher le menu quand ouvert */
   .nav.menuOpen {
     display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between; /* Liens en haut, bouton en bas */
+    height: calc(100vh - 100px);
+    min-height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+    /* Permettre le scroll dans les enfants */
+    overflow: visible;
+  }
+
+  /* Sur mobile, le conteneur des liens devient scrollable */
+  .nav.menuOpen .navLinksContainer {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    flex: 1 1 0 !important; /* Prend tout l'espace disponible */
+    min-height: 0 !important;
+    /* Hauteur maximale pour forcer le scroll : hauteur du menu moins l'espace pour le bouton */
+    /* Menu = calc(100vh - 100px), padding top = 2rem (32px), bouton = ~120px */
+    max-height: calc(100vh - 100px - 2rem - 120px) !important;
+    width: 100% !important;
+    /* S'assurer que les liens sont visibles */
+    visibility: visible !important;
+    opacity: 1 !important;
+    /* Permettre le scroll pour voir tous les liens */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+    /* S'assurer que tous les liens peuvent être vus */
+    padding-right: 0.5rem; /* Espace pour la scrollbar */
+  }
+
+  /* Style de la scrollbar pour WebKit (Chrome, Safari) */
+  .nav.menuOpen .navLinksContainer::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .nav.menuOpen .navLinksContainer::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .nav.menuOpen .navLinksContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
   }
 
   .navLink {
@@ -178,52 +244,16 @@
     padding: 0.75rem 0;
     width: 100%;
     text-align: center;
-  }
-
-  .mobileSeparator {
-    display: block;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.2) 20%,
-      rgba(255, 255, 255, 0.3) 50%,
-      rgba(255, 255, 255, 0.2) 80%,
-      transparent 100%
-    );
-    margin: 1.5rem 0 1rem 0;
     flex-shrink: 0;
-  }
-
-  .languageButton {
-    margin-left: 0 !important;
-    margin-top: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    text-align: center !important;
-    padding: 0.875rem 1.5rem !important;
-    font-size: 0.9rem !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    z-index: 10;
-    position: relative;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
+    /* S'assurer que les liens sont visibles */
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     color: #ffffff !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.1em !important;
-    text-transform: uppercase !important;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-    flex-shrink: 0;
-    order: 999;
   }
 
-  .languageButton:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.5);
+  /* Masquer le bouton de langue desktop sur mobile */
+  .languageButton {
+    display: none !important;
   }
 }

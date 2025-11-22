@@ -1,0 +1,74 @@
+/* Conteneur du bouton de langue pour mobile */
+.languageButtonContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.5rem 0 2rem 0;
+  flex-shrink: 0 !important; /* Ne pas rétrécir - reste toujours visible */
+  /* Le bouton sera en bas grâce à justify-content: space-between du parent */
+}
+
+/* Séparateur visuel au-dessus du bouton */
+.separator {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.2) 80%,
+    transparent 100%
+  );
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+/* Bouton de changement de langue */
+.languageButton {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+
+  /* Style visuel */
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+
+  /* Effets */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  flex-shrink: 0;
+}
+
+.languageButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.languageButton:active {
+  transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Masquer sur desktop */
+@media (min-width: 769px) {
+  .languageButtonContainer {
+    display: none;
+  }
+}

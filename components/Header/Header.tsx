@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import styles from "./Header.module.css";
 import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageButtonMobile from "@/components/LanguageButtonMobile/LanguageButtonMobile";
 
 export default function Header() {
   const pathname = usePathname();
@@ -19,7 +20,7 @@ export default function Header() {
     { href: "/pedago", label: t.nav.pedago },
     { href: "/contact", label: t.nav.contact },
   ];
-  // Fonction ppour changer la langue qu'on appelle dans le boutton de changement de langue // 
+  // Fonction ppour changer la langue qu'on appelle dans le boutton de changement de langue //
   const toggleLanguage = () => {
     setLanguage(language === "fr" ? "en" : "fr");
   };
@@ -39,28 +40,28 @@ export default function Header() {
 
         {/* Barre de navigation */}
         <nav className={`${styles.nav} ${isMenuOpen ? styles.menuOpen : ""}`}>
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`${styles.navLink} ${isActive ? styles.active : ""}`}
-                onClick={closeMenu}
-                prefetch={false}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-          {/* Séparateur visuel pour mobile */}
-          <div className={styles.mobileSeparator}></div>
-          {/* Bouton de changement de langue */}
+          {/* Conteneur scrollable pour les liens */}
+          <div className={styles.navLinksContainer}>
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`${styles.navLink} ${
+                    isActive ? styles.active : ""
+                  }`}
+                  onClick={closeMenu}
+                  prefetch={false}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+          {/* Bouton de langue desktop - visible uniquement sur desktop */}
           <button
-            onClick={() => {
-              toggleLanguage();
-              // Ne pas fermer le menu pour permettre de voir le changement
-            }}
+            onClick={toggleLanguage}
             className={styles.languageButton}
             aria-label={`Switch to ${
               language === "fr" ? "English" : "Français"
@@ -69,6 +70,8 @@ export default function Header() {
           >
             {language === "fr" ? "EN" : "FR"}
           </button>
+          {/* Composant bouton de langue pour mobile - visible uniquement sur mobile */}
+          <LanguageButtonMobile />
         </nav>
         {/* Bouton burger pour les petits écrans */}
         <button
