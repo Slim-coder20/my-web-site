@@ -82,6 +82,27 @@ export interface Translations {
     };
     contactMe: string;
   };
+  contact: {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    send: string;
+    sending: string;
+    subjectOptions: {
+      contact: string;
+      collaboration: string;
+      concert: string;
+      press: string;
+      training: string;
+      other: string;
+    };
+    messages: {
+      success: string;
+      error: string;
+      errorGeneric: string;
+    };
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -177,6 +198,28 @@ export const translations: Record<Language, Translations> = {
       },
       contactMe: "Me contacter",
     },
+    contact: {
+      name: "Nom",
+      email: "Email",
+      subject: "Sujet",
+      message: "Message",
+      send: "Envoyer",
+      sending: "Envoi en cours...",
+      subjectOptions: {
+        contact: "Demande de contact",
+        collaboration: "Demande de collaboration",
+        concert: "Demande de concert",
+        press: "Demande de presse",
+        training: "Demande de formation",
+        other: "Autre",
+      },
+      messages: {
+        success:
+          "Merci de nous avoir contacté ! Nous vous répondrons dans les 24 heures.",
+        error: "Erreur lors de l'envoi de l'email",
+        errorGeneric: "Une erreur est survenue. Veuillez réessayer.",
+      },
+    },
   },
   en: {
     nav: {
@@ -269,6 +312,28 @@ export const translations: Record<Language, Translations> = {
         },
       },
       contactMe: "Contact me",
+    },
+    contact: {
+      name: "Name",
+      email: "Email",
+      subject: "Subject",
+      message: "Message",
+      send: "Send",
+      sending: "Sending...",
+      subjectOptions: {
+        contact: "Contact request",
+        collaboration: "Collaboration request",
+        concert: "Concert request",
+        press: "Press request",
+        training: "Training request",
+        other: "Other",
+      },
+      messages: {
+        success:
+          "Thank you for contacting us! We will respond within 24 hours.",
+        error: "Error sending email",
+        errorGeneric: "An error occurred. Please try again.",
+      },
     },
   },
 };

@@ -3,15 +3,17 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./contact.module.css";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ContactForm() {
   // Initialisation du router pour la navigation
   const router = useRouter();
+  const { t } = useLanguage();
 
   // États pour gérer le formulaire
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("Demande de contact");
+  const [subject, setSubject] = useState(t.contact.subjectOptions.contact);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<{
@@ -38,14 +40,13 @@ export default function ContactForm() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Erreur lors de l'envoi de l'email");
+        throw new Error(data.error || t.contact.messages.error);
       }
 
       // Succès : réinitialiser le formulaire et afficher un message et ajout d'un settimeout pour rediriger vers la page d'accueil après 3 secondes
       setStatus({
         type: "success",
-        message:
-          "Merci de nous avoir contacté ! Nous vous répondrons dans les 24 heures.",
+        message: t.contact.messages.success,
       });
       setTimeout(() => {
         // redirection vers la page d'accueil
@@ -54,7 +55,7 @@ export default function ContactForm() {
       // réinitialisation du formulaire
       setName("");
       setEmail("");
-      setSubject("Demande de contact"); // réinitialisation du sujet par défaut
+      setSubject(t.contact.subjectOptions.contact); // réinitialisation du sujet par défaut
       setMessage(""); // réinitialisation du message
     } catch (error) {
       // Erreur : afficher un message d'erreur
@@ -63,7 +64,7 @@ export default function ContactForm() {
         message:
           error instanceof Error
             ? error.message
-            : "Une erreur est survenue. Veuillez réessayer.",
+            : t.contact.messages.errorGeneric,
       });
     } finally {
       setLoading(false);
@@ -74,7 +75,7 @@ export default function ContactForm() {
     <div className={styles.contactFormContainer}>
       <form className={styles.contactForm} onSubmit={handleSubmit}>
         <div className={styles.contactFormGroup}>
-          <label htmlFor="name">Nom</label>
+          <label htmlFor="name">{t.contact.name}</label>
           <input
             type="text"
             id="name"
@@ -87,7 +88,7 @@ export default function ContactForm() {
           />
         </div>
         <div className={styles.contactFormGroup}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t.contact.email}</label>
           <input
             type="email"
             id="email"
@@ -100,7 +101,7 @@ export default function ContactForm() {
           />
         </div>
         <div className={styles.contactFormGroup}>
-          <label htmlFor="subject">Sujet</label>
+          <label htmlFor="subject">{t.contact.subject}</label>
           <select
             id="subject"
             name="subject"
@@ -109,18 +110,28 @@ export default function ContactForm() {
             className={styles.contactFormInput}
             disabled={loading}
           >
-            <option value="Demande de contact">Demande de contact</option>
-            <option value="Demande de collaboration">
-              Demande de collaboration
+            <option value={t.contact.subjectOptions.contact}>
+              {t.contact.subjectOptions.contact}
             </option>
-            <option value="Demande de concert">Demande de concert</option>
-            <option value="Demande de presse">Demande de presse</option>
-            <option value="Demande de formation">Demande de formation</option>
-            <option value="Autre">Autre</option>
+            <option value={t.contact.subjectOptions.collaboration}>
+              {t.contact.subjectOptions.collaboration}
+            </option>
+            <option value={t.contact.subjectOptions.concert}>
+              {t.contact.subjectOptions.concert}
+            </option>
+            <option value={t.contact.subjectOptions.press}>
+              {t.contact.subjectOptions.press}
+            </option>
+            <option value={t.contact.subjectOptions.training}>
+              {t.contact.subjectOptions.training}
+            </option>
+            <option value={t.contact.subjectOptions.other}>
+              {t.contact.subjectOptions.other}
+            </option>
           </select>
         </div>
         <div className={styles.contactFormGroup}>
-          <label htmlFor="message">Message</label>
+          <label htmlFor="message">{t.contact.message}</label>
           <textarea
             id="message"
             name="message"
@@ -136,7 +147,7 @@ export default function ContactForm() {
           className={styles.contactFormButton}
           disabled={loading}
         >
-          {loading ? "Envoi en cours..." : "Envoyer"}
+          {loading ? t.contact.sending : t.contact.send}
         </button>
         {status && (
           <div

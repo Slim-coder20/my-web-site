@@ -19,7 +19,7 @@ export default function Header() {
     { href: "/pedago", label: t.nav.pedago },
     { href: "/contact", label: t.nav.contact },
   ];
-
+  // Fonction ppour changer la langue qu'on appelle dans le boutton de changement de langue // 
   const toggleLanguage = () => {
     setLanguage(language === "fr" ? "en" : "fr");
   };
