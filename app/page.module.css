@@ -1,20 +1,22 @@
 .homeContainer {
   width: 100%;
   min-height: calc(100vh - 200px);
-  padding-top: 120px; /* Espace pour le header fixe */
+  padding-top: 0; /* Pas de padding-top, la section hero gère son propre espacement */
 }
 
 /* Section Hero */
 .hero {
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
+  padding-top: 120px; /* Espace pour le header fixe */
+  box-sizing: border-box;
 }
 
 .videoContainer {
@@ -134,6 +136,7 @@
   margin: 0 auto;
   padding: 4rem 2rem;
   position: relative;
+  padding-top: 4rem; /* Espacement uniforme pour toutes les sections */
 }
 
 .section::before {
@@ -198,6 +201,54 @@
   transform: translateY(-2px);
 }
 
+/* Icône de flèche pour scroller */
+.scrollArrow {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  animation: bounceArrow 2s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+    0 0 40px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.1);
+}
+
+.scrollArrow:hover {
+  color: rgba(255, 255, 255, 1);
+  transform: translateX(-50%) translateY(-5px);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.7),
+    0 0 50px rgba(255, 255, 255, 0.5), 0 0 70px rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.scrollArrow svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* Animation de rebond pour la flèche */
+@keyframes bounceArrow {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(-50%) translateY(10px);
+    opacity: 1;
+  }
+}
+
 /* Animations */
 @keyframes fadeInUp {
   from {
@@ -254,12 +305,13 @@
 
 @media (max-width: 480px) {
   .homeContainer {
-    padding-top: 100px;
+    padding-top: 0;
   }
 
   .hero {
-    height: 60vh;
+    height: 100vh;
     min-height: 400px;
+    padding-top: 100px;
   }
 
   .heroTitle {
@@ -268,5 +320,14 @@
 
   .heroSubtitle {
     font-size: 1rem;
+  }
+
+  .scrollArrow {
+    bottom: 1rem;
+  }
+
+  .scrollArrow svg {
+    width: 24px;
+    height: 24px;
   }
 }

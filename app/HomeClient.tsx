@@ -15,6 +15,7 @@ export default function HomeClient({
 }: HomeClientProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const currentUrlRef = useRef<string | null>(null);
+  const nextSectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -79,6 +80,19 @@ export default function HomeClient({
     }
   }, [backgroundVideoUrl, backgroundVideoType]);
 
+  // Fonction pour scroller vers la section suivante
+  const scrollToNextSection = () => {
+    if (nextSectionRef.current) {
+      nextSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Fallback : scroller de la hauteur de la fenêtre
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className={styles.homeContainer}>
       {/* Section Hero */}
@@ -118,10 +132,32 @@ export default function HomeClient({
             <div className={styles.videoOverlay}></div>
           </div>
         )}
+        {/* Icône de flèche pour indiquer de scroller */}
+        <button
+          onClick={scrollToNextSection}
+          className={styles.scrollArrow}
+          aria-label="Scroller vers le contenu"
+        >
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 5V19M12 19L19 12M12 19L5 12"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
       </section>
 
       {/* Section News */}
-      <section className={styles.section}>
+      <section ref={nextSectionRef} className={styles.section}>
         <div className={styles.sectionContent}>
           <h2 className={styles.sectionTitle}>News </h2>
           <p className={styles.sectionText}>
