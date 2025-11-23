@@ -4,15 +4,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminLayout from "@/components/AdminLayout/AdminLayout";
 import styles from "./albums.module.css";
-
+// création d'une interface pour les albums / 
 interface Album {
   id: number;
   slug: string;
   title: string;
-  description: string | null;
+  description: string | null; 
   priceCents: number;
   coverUrl: string | null;
 }
+// création d'une interface pour les donnéess du formulaire //
 
 export default function AdminAlbums() {
   const router = useRouter();
