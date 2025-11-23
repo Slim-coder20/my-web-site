@@ -192,6 +192,15 @@ export interface Translations {
     orderInfo: string; // "Informations de commande" / "Order Information"
     noCover: string; // "Pas de pochette" / "No cover"
   };
+
+  // ========================================================================
+  // PAGE CONCERTS - Textes de la page des concerts
+  // ========================================================================
+  concerts: {
+    title: string; // "Les concerts de Slim Abida" / "Slim Abida's Concerts"
+    description: string; // "Tous les Concerts de Slim Abida" / "All Slim Abida's Concerts"
+    noConcerts: string; // "Aucun concert disponible pour le moment." / "No concerts available at the moment."
+  };
 }
 
 // ============================================================================
@@ -339,6 +348,11 @@ export const translations: Record<Language, Translations> = {
       orderInfo: "Informations de commande",
       noCover: "Pas de pochette",
     },
+    concerts: {
+      title: "Les concerts de Slim Abida",
+      description: "Tous les Concerts de Slim Abida",
+      noConcerts: "Aucun concert disponible pour le moment.",
+    },
   },
 
   // ========================================================================
@@ -475,6 +489,11 @@ export const translations: Record<Language, Translations> = {
       selectedAlbum: "Selected Album",
       orderInfo: "Order Information",
       noCover: "No cover",
+    },
+    concerts: {
+      title: "Slim Abida's Concerts",
+      description: "All Slim Abida's Concerts",
+      noConcerts: "No concerts available at the moment.",
     },
   },
 };

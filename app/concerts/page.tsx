@@ -1,6 +1,8 @@
 import styles from "./concerts.module.css";
 import ConcertCard from "@/components/ConcertCard/ConcertCard";
 import { prisma } from "@/lib/prisma";
+import ConcertsHeader from "./ConcertsHeader";
+import ConcertsEmptyState from "./ConcertsEmptyState";
 
 // Forcer le rendu dynamique (SSR) pour éviter les erreurs de connexion MySQL pendant le build
 export const dynamic = "force-dynamic";
@@ -9,8 +11,11 @@ export const dynamic = "force-dynamic";
 async function getConcerts() {
   try {
     console.log("🔍 Tentative de connexion à MySQL pour concerts...");
-    console.log("DATABASE_URL:", process.env.DATABASE_URL ? "✅ Définie" : "❌ Non définie");
-    
+    console.log(
+      "DATABASE_URL:",
+      process.env.DATABASE_URL ? "✅ Définie" : "❌ Non définie"
+    );
+
     const concerts = await prisma.concert.findMany({
       select: {
         id: true,
@@ -24,7 +29,7 @@ async function getConcerts() {
         date: "desc", // Tri par date décroissante (les plus récents en premier)
       },
     });
-    
+
     console.log(`✅ ${concerts.length} concerts récupérés`);
     return concerts;
   } catch (error) {
@@ -53,14 +58,9 @@ export default async function Concerts() {
   return (
     <div className={styles.concertsContainer}>
       <section className={styles.concertsSection}>
-        <h1 className={styles.concertsTitle}>Les concerts de Slim Abida</h1>
-        <p className={styles.concertsDescription}>
-          Tous les Concerts de Slim Abida
-        </p>
+        <ConcertsHeader />
         {concerts.length === 0 ? (
-          <div className={styles.emptyState}>
-            <p>Aucun concert disponible pour le moment.</p>
-          </div>
+          <ConcertsEmptyState />
         ) : (
           <div className={styles.concertsGrid}>
             {concerts.map(
