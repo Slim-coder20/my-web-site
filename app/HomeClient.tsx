@@ -25,17 +25,34 @@ export default function HomeClient({
 
     // Ne configurer les event listeners qu'une seule fois
     const handleError = (e: Event) => {
-      console.warn("La vidéo en arrière-plan n'a pas pu être chargée:", e);
+      const videoElement = e.target as HTMLVideoElement;
+      const error = videoElement.error;
+      console.error("❌ Erreur vidéo d'arrière-plan:", {
+        errorCode: error?.code,
+        errorMessage: error?.message,
+        networkState: videoElement.networkState,
+        readyState: videoElement.readyState,
+        src: videoElement.querySelector("source")?.src,
+      });
       // Masquer la vidéo en cas d'erreur
       if (video.parentElement) {
         video.parentElement.style.display = "none";
       }
     };
 
+    const handleLoadStart = () => {
+      console.log("🎬 Début du chargement de la vidéo d'arrière-plan");
+    };
+
+    const handleLoadedMetadata = () => {
+      console.log("✅ Métadonnées de la vidéo d'arrière-plan chargées");
+    };
+
     const handleCanPlay = () => {
+      console.log("✅ Vidéo d'arrière-plan prête à être lue");
       // La vidéo est prête à être lue
       video.play().catch((error) => {
-        console.warn("Erreur lors de la lecture de la vidéo:", error);
+        console.error("❌ Erreur lors de la lecture de la vidéo:", error);
         // Si la lecture échoue, masquer la vidéo
         if (video.parentElement) {
           video.parentElement.style.display = "none";
@@ -43,10 +60,14 @@ export default function HomeClient({
       });
     };
 
+    video.addEventListener("loadstart", handleLoadStart);
+    video.addEventListener("loadedmetadata", handleLoadedMetadata);
     video.addEventListener("error", handleError);
     video.addEventListener("canplay", handleCanPlay);
 
     return () => {
+      video.removeEventListener("loadstart", handleLoadStart);
+      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
       video.removeEventListener("error", handleError);
       video.removeEventListener("canplay", handleCanPlay);
     };
@@ -55,12 +76,27 @@ export default function HomeClient({
   // Effet séparé pour mettre à jour la source de la vidéo
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !backgroundVideoUrl) return;
+
+    if (!backgroundVideoUrl) {
+      console.warn("⚠️ Aucune URL de vidéo d'arrière-plan fournie");
+      return;
+    }
+
+    if (!video) {
+      console.warn("⚠️ Référence vidéo non disponible");
+      return;
+    }
 
     // Éviter les rechargements inutiles si l'URL n'a pas changé
     if (currentUrlRef.current === backgroundVideoUrl) {
+      console.log("ℹ️ URL de vidéo inchangée, pas de rechargement");
       return;
     }
+
+    console.log("🔄 Mise à jour de la source vidéo:", {
+      url: backgroundVideoUrl,
+      type: backgroundVideoType,
+    });
 
     const source = video.querySelector("source");
     if (source) {
@@ -73,12 +109,15 @@ export default function HomeClient({
 
       // Utiliser un timeout pour éviter les boucles de re-rendu
       const timeoutId = setTimeout(() => {
+        console.log("🔄 Rechargement de la vidéo avec la nouvelle source");
         video.load();
       }, 100);
 
       return () => {
         clearTimeout(timeoutId);
       };
+    } else {
+      console.error("❌ Élément <source> non trouvé dans la vidéo");
     }
   }, [backgroundVideoUrl, backgroundVideoType]);
 
@@ -101,9 +140,7 @@ export default function HomeClient({
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>{t.home.title}</h1>
-          <h3 className={styles.heroSubtitle2}>
-            {t.home.subtitle}
-          </h3>
+          <h3 className={styles.heroSubtitle2}>{t.home.subtitle}</h3>
           <p className={styles.heroSubtitle}>{t.home.subtitle2}</p>
           <div className={styles.heroButtons}>
             <Link href="/discographie" className={styles.primaryButton}>
@@ -162,9 +199,7 @@ export default function HomeClient({
       <section ref={nextSectionRef} className={styles.section}>
         <div className={styles.sectionContent}>
           <h2 className={styles.sectionTitle}>{t.home.news.title}</h2>
-          <p className={styles.sectionText}>
-            {t.home.news.description}
-          </p>
+          <p className={styles.sectionText}>{t.home.news.description}</p>
           <div className={styles.heroButtons}>
             <Link href="/news" className={styles.primaryButton}>
               {t.home.news.seeNews}
@@ -183,9 +218,7 @@ export default function HomeClient({
       <section className={styles.section}>
         <div className={styles.sectionContent}>
           <h2 className={styles.sectionTitle}>{t.home.about.title}</h2>
-          <p className={styles.sectionText}>
-            {t.home.about.description}
-          </p>
+          <p className={styles.sectionText}>{t.home.about.description}</p>
           <Link href="/about" className={styles.linkButton}>
             {t.home.about.learnMore}
           </Link>
@@ -196,9 +229,7 @@ export default function HomeClient({
       <section className={styles.section}>
         <div className={styles.sectionContent}>
           <h2 className={styles.sectionTitle}>{t.home.music.title}</h2>
-          <p className={styles.sectionText}>
-            {t.home.music.description}
-          </p>
+          <p className={styles.sectionText}>{t.home.music.description}</p>
           <Link href="/discographie" className={styles.linkButton}>
             {t.home.music.listenNow}
           </Link>
@@ -208,9 +239,7 @@ export default function HomeClient({
       <section className={styles.section}>
         <div className={styles.sectionContent}>
           <h2 className={styles.sectionTitle}>{t.home.videos.title}</h2>
-          <p className={styles.sectionText}>
-            {t.home.videos.description}
-          </p>
+          <p className={styles.sectionText}>{t.home.videos.description}</p>
           <Link href="/videos" className={styles.linkButton}>
             {t.home.videos.seeVideos}
           </Link>
@@ -221,9 +250,7 @@ export default function HomeClient({
       <section className={styles.section}>
         <div className={styles.sectionContent}>
           <h2 className={styles.sectionTitle}>{t.home.concerts.title}</h2>
-          <p className={styles.sectionText}>
-            {t.home.concerts.description}
-          </p>
+          <p className={styles.sectionText}>{t.home.concerts.description}</p>
           <Link href="/concerts" className={styles.linkButton}>
             {t.home.concerts.seeDates}
           </Link>
@@ -233,9 +260,7 @@ export default function HomeClient({
       <section className={styles.section}>
         <div className={styles.sectionContent}>
           <h2 className={styles.sectionTitle}>{t.home.formation.title}</h2>
-          <p className={styles.sectionText}>
-            {t.home.formation.description}
-          </p>
+          <p className={styles.sectionText}>{t.home.formation.description}</p>
           <Link href="/pedago" className={styles.linkButton}>
             {t.home.formation.seeCourses}
           </Link>
