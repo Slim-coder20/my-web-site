@@ -1,0 +1,68 @@
+.notFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+  width: 100%;
+  padding: 2rem;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding-top: 140px; /* Espace pour le header fixe */
+}
+
+.notFoundTitle {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.notFoundDescription {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #d0d0d0;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+}
+
+.homeButton {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.homeButton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .notFoundTitle {
+    font-size: 1rem;
+  }
+
+  .notFoundDescription {
+    font-size: 1rem;
+  }
+
+  .homeButton {
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
+  }
+}
+
