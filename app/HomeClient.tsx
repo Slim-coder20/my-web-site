@@ -21,19 +21,42 @@ export default function HomeClient({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video) {
+      console.warn("⚠️ Référence vidéo non disponible");
+      return;
+    }
 
     // Ne configurer les event listeners qu'une seule fois
     const handleError = (e: Event) => {
       const videoElement = e.target as HTMLVideoElement;
       const error = videoElement.error;
+      const source = videoElement.querySelector("source");
       console.error("❌ Erreur vidéo d'arrière-plan:", {
         errorCode: error?.code,
         errorMessage: error?.message,
         networkState: videoElement.networkState,
         readyState: videoElement.readyState,
-        src: videoElement.querySelector("source")?.src,
+        src: source?.src,
+        type: source?.type,
+        currentSrc: videoElement.currentSrc,
       });
+
+      // Afficher les codes d'erreur possibles
+      if (error) {
+        const errorMessages: { [key: number]: string } = {
+          1: "MEDIA_ERR_ABORTED - Le chargement a été interrompu",
+          2: "MEDIA_ERR_NETWORK - Erreur réseau",
+          3: "MEDIA_ERR_DECODE - Erreur de décodage",
+          4: "MEDIA_ERR_SRC_NOT_SUPPORTED - Format non supporté",
+        };
+        console.error(
+          "Code d'erreur:",
+          error.code,
+          "-",
+          errorMessages[error.code] || "Erreur inconnue"
+        );
+      }
+
       // Masquer la vidéo en cas d'erreur
       if (video.parentElement) {
         video.parentElement.style.display = "none";
@@ -41,35 +64,105 @@ export default function HomeClient({
     };
 
     const handleLoadStart = () => {
-      console.log("🎬 Début du chargement de la vidéo d'arrière-plan");
+      const source = video.querySelector("source");
+      console.log("🎬 Début du chargement de la vidéo d'arrière-plan", {
+        src: source?.src,
+        type: source?.type,
+      });
     };
 
     const handleLoadedMetadata = () => {
-      console.log("✅ Métadonnées de la vidéo d'arrière-plan chargées");
+      console.log("✅ Métadonnées de la vidéo d'arrière-plan chargées", {
+        duration: video.duration,
+        videoWidth: video.videoWidth,
+        videoHeight: video.videoHeight,
+        currentSrc: video.currentSrc,
+      });
+    };
+
+    const handleLoadedData = () => {
+      console.log("✅ Données de la vidéo chargées", {
+        duration: video.duration,
+        videoWidth: video.videoWidth,
+        videoHeight: video.videoHeight,
+      });
+
+      // Essayer de démarrer la lecture dès que les données sont chargées
+      if (video.paused) {
+        video.play().catch((error) => {
+          console.warn(
+            "⚠️ Impossible de démarrer la lecture automatiquement:",
+            error
+          );
+        });
+      }
     };
 
     const handleCanPlay = () => {
-      console.log("✅ Vidéo d'arrière-plan prête à être lue");
-      // La vidéo est prête à être lue
-      video.play().catch((error) => {
-        console.error("❌ Erreur lors de la lecture de la vidéo:", error);
-        // Si la lecture échoue, masquer la vidéo
-        if (video.parentElement) {
-          video.parentElement.style.display = "none";
-        }
+      console.log("✅ Vidéo d'arrière-plan prête à être lue", {
+        readyState: video.readyState,
+        networkState: video.networkState,
+        paused: video.paused,
+        currentTime: video.currentTime,
       });
+
+      // Forcer la lecture - essayer plusieurs fois si nécessaire
+      const tryPlay = async () => {
+        try {
+          // S'assurer que la vidéo est bien muette pour l'autoplay
+          video.muted = true;
+          video.volume = 0;
+
+          await video.play();
+          console.log(
+            "▶️ Lecture de la vidéo d'arrière-plan démarrée avec succès"
+          );
+
+          // Vérifier que la vidéo joue bien
+          if (video.paused) {
+            console.warn("⚠️ La vidéo est toujours en pause après play()");
+          } else {
+            console.log("✅ Vidéo en cours de lecture");
+          }
+        } catch (error) {
+          console.error("❌ Erreur lors de la lecture de la vidéo:", error);
+          console.error("Détails de l'erreur:", {
+            name: (error as Error).name,
+            message: (error as Error).message,
+          });
+
+          // Ne pas masquer la vidéo, juste logger l'erreur
+          // Certains navigateurs bloquent l'autoplay mais la vidéo peut être visible
+        }
+      };
+
+      tryPlay();
+    };
+
+    const handleWaiting = () => {
+      console.warn("⏳ Vidéo en attente de données");
+    };
+
+    const handleStalled = () => {
+      console.warn("⚠️ Chargement de la vidéo bloqué");
     };
 
     video.addEventListener("loadstart", handleLoadStart);
     video.addEventListener("loadedmetadata", handleLoadedMetadata);
+    video.addEventListener("loadeddata", handleLoadedData);
     video.addEventListener("error", handleError);
     video.addEventListener("canplay", handleCanPlay);
+    video.addEventListener("waiting", handleWaiting);
+    video.addEventListener("stalled", handleStalled);
 
     return () => {
       video.removeEventListener("loadstart", handleLoadStart);
       video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      video.removeEventListener("loadeddata", handleLoadedData);
       video.removeEventListener("error", handleError);
       video.removeEventListener("canplay", handleCanPlay);
+      video.removeEventListener("waiting", handleWaiting);
+      video.removeEventListener("stalled", handleStalled);
     };
   }, []); // Ne se déclenche qu'une seule fois au montage
 
@@ -100,17 +193,91 @@ export default function HomeClient({
 
     const source = video.querySelector("source");
     if (source) {
+      // Vérifier que l'URL est accessible avant de la définir
+      console.log("🔗 Définition de la source:", {
+        oldSrc: source.src,
+        newSrc: backgroundVideoUrl,
+        type: backgroundVideoType,
+      });
+
       source.src = backgroundVideoUrl;
       if (backgroundVideoType) {
         source.type = backgroundVideoType;
       }
+
       // Marquer l'URL actuelle pour éviter les rechargements en boucle
       currentUrlRef.current = backgroundVideoUrl;
+
+      // Vérifier l'accessibilité du fichier
+      fetch(backgroundVideoUrl, { method: "HEAD" })
+        .then((response) => {
+          if (response.ok) {
+            console.log("✅ Fichier vidéo accessible:", {
+              status: response.status,
+              contentType: response.headers.get("content-type"),
+              contentLength: response.headers.get("content-length"),
+            });
+          } else {
+            console.error("❌ Fichier vidéo non accessible:", {
+              status: response.status,
+              statusText: response.statusText,
+              url: backgroundVideoUrl,
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("❌ Erreur lors de la vérification du fichier:", error);
+        });
 
       // Utiliser un timeout pour éviter les boucles de re-rendu
       const timeoutId = setTimeout(() => {
         console.log("🔄 Rechargement de la vidéo avec la nouvelle source");
         video.load();
+
+        // Vérifier l'état après le chargement
+        setTimeout(() => {
+          const source = video.querySelector("source");
+          const container = video.parentElement;
+
+          console.log("📊 État de la vidéo après chargement:", {
+            networkState: video.networkState,
+            readyState: video.readyState,
+            currentSrc: video.currentSrc,
+            paused: video.paused,
+            muted: video.muted,
+            volume: video.volume,
+            duration: video.duration,
+            currentTime: video.currentTime,
+            videoWidth: video.videoWidth,
+            videoHeight: video.videoHeight,
+            sourceSrc: source?.src,
+            sourceType: source?.type,
+            containerDisplay: container
+              ? window.getComputedStyle(container).display
+              : "N/A",
+            containerVisibility: container
+              ? window.getComputedStyle(container).visibility
+              : "N/A",
+            videoDisplay: window.getComputedStyle(video).display,
+            videoVisibility: window.getComputedStyle(video).visibility,
+            error: video.error
+              ? {
+                  code: video.error.code,
+                  message: video.error.message,
+                }
+              : null,
+          });
+
+          // Si la vidéo est en pause, essayer de la démarrer
+          if (video.paused && video.readyState >= 2) {
+            console.log(
+              "🔄 Tentative de démarrage de la vidéo (elle est en pause)"
+            );
+            video.play().catch((error) => {
+              console.error("❌ Impossible de démarrer la vidéo:", error);
+            });
+          }
+        }, 1000);
       }, 100);
 
       return () => {
@@ -167,6 +334,8 @@ export default function HomeClient({
                 src={backgroundVideoUrl}
                 type={backgroundVideoType || "video/mp4"}
               />
+              {/* Message de fallback si la vidéo ne peut pas être chargée */}
+              Votre navigateur ne supporte pas la lecture de vidéos.
             </video>
             <div className={styles.videoOverlay}></div>
           </div>
