@@ -24,6 +24,9 @@ import { redirect } from "next/navigation";
 import CheckoutForm from "@/components/CheckoutForm/CheckoutForm";
 import Image from "next/image";
 import styles from "./checkout.module.css";
+import CheckoutHeader from "./CheckoutHeader";
+import NoCover from "@/components/NoCover/NoCover";
+import CheckoutSectionTitle from "./CheckoutSectionTitle";
 
 /**
  * Fonction pour récupérer un produit depuis la base de données
@@ -94,12 +97,12 @@ export default async function CheckoutPage({
   return (
     <div className={styles.checkoutContainer}>
       <section className={styles.checkoutSection}>
-        <h1 className={styles.title}>Récapitulatif de votre commande</h1>
+        <CheckoutHeader />
 
         <div className={styles.checkoutContent}>
           {/* Section récapitulatif : affiche les détails de l'album */}
           <div className={styles.productSummary}>
-            <h2 className={styles.sectionTitle}>Album sélectionné</h2>
+            <CheckoutSectionTitle type="selectedAlbum" />
             <div className={styles.productCard}>
               {/* Affichage de la pochette de l'album */}
               {product.coverUrl ? (
@@ -112,7 +115,7 @@ export default async function CheckoutPage({
                 />
               ) : (
                 <div className={styles.productPlaceholder}>
-                  <span>Pas de pochette</span>
+                  <NoCover section="checkout" />
                 </div>
               )}
               {/* Informations de l'album */}
@@ -132,7 +135,7 @@ export default async function CheckoutPage({
 
           {/* Section formulaire : saisie de l'email et validation */}
           <div className={styles.formSection}>
-            <h2 className={styles.sectionTitle}>Informations de commande</h2>
+            <CheckoutSectionTitle type="orderInfo" />
             {/* Composant CheckoutForm qui gère la logique de checkout */}
             <CheckoutForm productId={product.id} />
           </div>

@@ -1,6 +1,7 @@
 import styles from "./videos.module.css";
 import { prisma } from "@/lib/prisma";
 import VideosClient from "./VideosClient";
+import VideosHeader from "./VideosHeader";
 
 // Forcer le rendu dynamique (SSR) pour éviter les erreurs de connexion MySQL pendant le build
 export const dynamic = "force-dynamic";
@@ -61,11 +62,7 @@ export default async function Videos() {
   return (
     <div className={styles.videosContainer}>
       <section className={styles.videosSection}>
-        <h1 className={styles.title}>Vidéos Live</h1>
-        <p className={styles.description}>
-          Découvrez les vidéos de Slim Abida et profitez de ses performances
-          live.
-        </p>
+        <VideosHeader />
         <VideosClient videos={serializedVideos} />
       </section>
       {/* Réseaux sociaux */}

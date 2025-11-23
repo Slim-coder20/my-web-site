@@ -1,16 +1,16 @@
 /**
  * Composant : CheckoutForm
- * 
+ *
  * Ce composant gère le formulaire de saisie de l'email et la création
  * de la session Stripe Checkout.
- * 
+ *
  * FLUX DE TRAVAIL :
  * 1. L'utilisateur saisit son email
  * 2. Validation de l'email (format basique)
  * 3. Appel à l'API /api/checkout avec productId et email
  * 4. L'API crée l'Order en base et la session Stripe
  * 5. Redirection automatique vers la page de paiement Stripe
- * 
+ *
  * NOTE : Ce composant est un Client Component car il gère :
  * - L'état du formulaire (useState)
  * - Les interactions utilisateur (onSubmit, onChange)
@@ -36,7 +36,7 @@ export default function CheckoutForm({ productId }: CheckoutFormProps) {
 
   /**
    * Gestion de la soumission du formulaire
-   * 
+   *
    * Cette fonction est appelée quand l'utilisateur clique sur "Procéder au paiement"
    */
   const handleSubmit = async (e: React.FormEvent) => {
@@ -54,7 +54,7 @@ export default function CheckoutForm({ productId }: CheckoutFormProps) {
     try {
       /**
        * APPEL À L'API /api/checkout
-       * 
+       *
        * Cette API va :
        * - Récupérer le produit depuis la base de données
        * - Créer une Order en statut "pending"
@@ -77,12 +77,14 @@ export default function CheckoutForm({ productId }: CheckoutFormProps) {
 
       // Vérification de la réponse de l'API
       if (!response.ok) {
-        throw new Error(data.error || "Erreur lors de la création de la commande");
+        throw new Error(
+          data.error || "Erreur lors de la création de la commande"
+        );
       }
 
       /**
        * REDIRECTION VERS STRIPE CHECKOUT
-       * 
+       *
        * Si tout s'est bien passé, on redirige l'utilisateur vers
        * la page de paiement Stripe hébergée par Stripe.
        * Après le paiement, Stripe redirigera vers success_url ou cancel_url

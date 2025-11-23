@@ -164,6 +164,34 @@ export interface Translations {
       errorGeneric: string; // Message d'erreur générique
     };
   };
+
+  // ========================================================================
+  // PAGE DISCOGRAPHIE - Textes de la page de discographie
+  // ========================================================================
+  discographie: {
+    title: string; // "Discographie" / "Discography"
+    description: string; // Description de la page
+    noCover: string; // "Pas de pochette" / "No cover"
+    noAlbums: string; // "Aucun album disponible pour le moment." / "No albums available at the moment."
+  };
+
+  // ========================================================================
+  // PAGE VIDEOS - Textes de la page des vidéos
+  // ========================================================================
+  videos: {
+    title: string; // "Vidéos Live" / "Live Videos"
+    description: string; // Description de la page
+  };
+
+  // ========================================================================
+  // PAGE CHECKOUT - Textes de la page de checkout
+  // ========================================================================
+  checkout: {
+    title: string; // "Récapitulatif de votre commande" / "Order Summary"
+    selectedAlbum: string; // "Album sélectionné" / "Selected Album"
+    orderInfo: string; // "Informations de commande" / "Order Information"
+    noCover: string; // "Pas de pochette" / "No cover"
+  };
 }
 
 // ============================================================================
@@ -293,6 +321,24 @@ export const translations: Record<Language, Translations> = {
         errorGeneric: "Une erreur est survenue. Veuillez réessayer.",
       },
     },
+    discographie: {
+      title: "Discographie",
+      description:
+        "Découvrez les albums de Slim Abida et soutenez l'artiste en achetant ses œuvres.",
+      noCover: "Pas de pochette",
+      noAlbums: "Aucun album disponible pour le moment.",
+    },
+    videos: {
+      title: "Vidéos Live",
+      description:
+        "Découvrez les vidéos de Slim Abida et profitez de ses performances live.",
+    },
+    checkout: {
+      title: "Récapitulatif de votre commande",
+      selectedAlbum: "Album sélectionné",
+      orderInfo: "Informations de commande",
+      noCover: "Pas de pochette",
+    },
   },
 
   // ========================================================================
@@ -411,6 +457,24 @@ export const translations: Record<Language, Translations> = {
         error: "Error sending email",
         errorGeneric: "An error occurred. Please try again.",
       },
+    },
+    discographie: {
+      title: "Discography",
+      description:
+        "Discover Slim Abida's albums and support the artist by purchasing his works.",
+      noCover: "No cover",
+      noAlbums: "No albums available at the moment.",
+    },
+    videos: {
+      title: "Live Videos",
+      description:
+        "Discover Slim Abida's videos and enjoy his live performances.",
+    },
+    checkout: {
+      title: "Order Summary",
+      selectedAlbum: "Selected Album",
+      orderInfo: "Order Information",
+      noCover: "No cover",
     },
   },
 };

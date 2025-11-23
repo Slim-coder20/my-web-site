@@ -4,6 +4,9 @@ import { prisma } from "@/lib/prisma";
 import BuyButton from "@/components/BuyButton/BuyButton";
 import PaymentVerifier from "@/components/PaymentVerifier/PaymentVerifier";
 import { Suspense } from "react";
+import DiscographieHeader from "./DiscographieHeader";
+import NoCover from "@/components/NoCover/NoCover";
+import DiscographieEmptyState from "./DiscographieEmptyState";
 
 // Forcer le rendu dynamique (SSR) pour éviter les erreurs de connexion MySQL pendant le build
 export const dynamic = "force-dynamic";
@@ -52,20 +55,14 @@ export default async function Discographie() {
   return (
     <div className={styles.discographieContainer}>
       <section className={styles.discographieSection}>
-        <h1 className={styles.title}>Discographie</h1>
-        <p className={styles.description}>
-          Découvrez les albums de Slim Abida et soutenez l&apos;artiste en
-          achetant ses œuvres.
-        </p>
+        <DiscographieHeader />
         {/* Vérification automatique du paiement après redirection depuis Stripe */}
         <Suspense fallback={null}>
           <PaymentVerifier />
         </Suspense>
 
         {products.length === 0 ? (
-          <div className={styles.emptyState}>
-            <p>Aucun album disponible pour le moment.</p>
-          </div>
+          <DiscographieEmptyState />
         ) : (
           <div className={styles.albumsGrid}>
             {products.map((product) => (
@@ -82,7 +79,7 @@ export default async function Discographie() {
                     />
                   ) : (
                     <div className={styles.coverPlaceholder}>
-                      <span>Pas de pochette</span>
+                      <NoCover />
                     </div>
                   )}
                 </div>
