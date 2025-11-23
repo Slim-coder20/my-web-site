@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import ConditionalLayout from "@/components/ConditionalLayout/ConditionalLayout";
 
 export const metadata: Metadata = {
   title: "Slim Abida ",
@@ -21,9 +20,7 @@ export default function RootLayout({
     <html lang="fr">
       <body>
         <LanguageProvider>
-          <Header />
-          <main className="flex-1 m-0 p-0">{children}</main>
-          <Footer />
+          <ConditionalLayout>{children}</ConditionalLayout>
         </LanguageProvider>
       </body>
     </html>
