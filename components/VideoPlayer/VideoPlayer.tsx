@@ -15,6 +15,62 @@ interface VideoPlayerProps {
   preload?: "none" | "metadata" | "auto";
 }
 
+/**
+ * Extrait l'ID d'une vidéo YouTube depuis différentes formats d'URL
+ *
+ * Formats supportés :
+ * - https://www.youtube.com/watch?v=VIDEO_ID
+ * - https://youtu.be/VIDEO_ID
+ * - https://www.youtube.com/embed/VIDEO_ID
+ * - https://youtube.com/watch?v=VIDEO_ID
+ */
+function extractYouTubeId(url: string): string | null {
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+    /^([a-zA-Z0-9_-]{11})$/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match && match[1]) {
+      return match[1];
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Vérifie si l'URL est une vidéo YouTube
+ */
+function isYouTubeUrl(url: string): boolean {
+  return /youtube\.com|youtu\.be/.test(url);
+}
+
+/**
+ * Convertit une URL YouTube en URL embed
+ */
+function getYouTubeEmbedUrl(
+  url: string,
+  autoPlay: boolean,
+  loop: boolean,
+  muted: boolean
+): string {
+  const videoId = extractYouTubeId(url);
+  if (!videoId) return url;
+
+  // Construire l'URL embed avec les paramètres optionnels
+  const params = new URLSearchParams();
+  if (autoPlay) params.append("autoplay", "1");
+  if (loop) params.append("loop", "1");
+  if (muted) params.append("mute", "1");
+
+  const queryString = params.toString();
+  return `https://www.youtube.com/embed/${videoId}${
+    queryString ? `?${queryString}` : ""
+  }`;
+}
+
 export default function VideoPlayer({
   videoUrl,
   videoType,
@@ -29,6 +85,9 @@ export default function VideoPlayer({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    // Si c'est YouTube, on n'a pas besoin des event listeners pour la balise video
+    if (isYouTubeUrl(videoUrl)) return;
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -130,15 +189,48 @@ export default function VideoPlayer({
       video.removeEventListener("stalled", handleStalled);
       video.removeEventListener("waiting", handleWaiting);
     };
-  }, [videoUrl]);
+  }, [videoUrl, autoPlay, loop, muted]);
 
+  // Si c'est une URL YouTube, utiliser un iframe
+  if (isYouTubeUrl(videoUrl)) {
+    const embedUrl = getYouTubeEmbedUrl(videoUrl, autoPlay, loop, muted);
+    return (
+      <div
+        className={className}
+        style={{
+          position: "relative",
+          paddingBottom: "56.25%",
+          height: 0,
+          overflow: "hidden",
+        }}
+      >
+        <iframe
+          src={embedUrl}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            border: "none",
+          }}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="YouTube video player"
+        />
+      </div>
+    );
+  }
+
+  // Sinon, utiliser la balise video HTML5 pour les vidéos hébergées
   // Normaliser l'URL : si c'est une URL absolue (http/https), l'utiliser telle quelle
   // Sinon, si c'est une URL relative, s'assurer qu'elle commence par /
-  const normalizedUrl = videoUrl.startsWith("http://") || videoUrl.startsWith("https://")
-    ? videoUrl
-    : videoUrl.startsWith("/")
-    ? videoUrl
-    : `/${videoUrl}`;
+  const normalizedUrl =
+    videoUrl.startsWith("http://") || videoUrl.startsWith("https://")
+      ? videoUrl
+      : videoUrl.startsWith("/")
+      ? videoUrl
+      : `/${videoUrl}`;
 
   return (
     <video
