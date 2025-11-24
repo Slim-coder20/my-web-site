@@ -208,26 +208,10 @@ export default function HomeClient({
       // Marquer l'URL actuelle pour éviter les rechargements en boucle
       currentUrlRef.current = backgroundVideoUrl;
 
-      // Vérifier l'accessibilité du fichier
-      fetch(backgroundVideoUrl, { method: "HEAD" })
-        .then((response) => {
-          if (response.ok) {
-            console.log("✅ Fichier vidéo accessible:", {
-              status: response.status,
-              contentType: response.headers.get("content-type"),
-              contentLength: response.headers.get("content-length"),
-            });
-          } else {
-            console.error("❌ Fichier vidéo non accessible:", {
-              status: response.status,
-              statusText: response.statusText,
-              url: backgroundVideoUrl,
-            });
-          }
-        })
-        .catch((error) => {
-          console.error("❌ Erreur lors de la vérification du fichier:", error);
-        });
+      // Note: On ne fait pas de fetch HEAD pour vérifier l'accessibilité car :
+      // 1. Cela cause des erreurs CORS avec Supabase Storage en développement
+      // 2. Le navigateur gère déjà les erreurs de chargement de vidéo via les event listeners
+      // 3. Les event listeners (handleError, handleLoadStart, etc.) fournissent déjà les informations nécessaires
 
       // Utiliser un timeout pour éviter les boucles de re-rendu
       const timeoutId = setTimeout(() => {
@@ -329,6 +313,11 @@ export default function HomeClient({
               playsInline
               className={styles.heroVideo}
               preload="auto"
+              crossOrigin={
+                backgroundVideoUrl.includes("supabase.co")
+                  ? "anonymous"
+                  : undefined
+              }
             >
               <source
                 src={backgroundVideoUrl}

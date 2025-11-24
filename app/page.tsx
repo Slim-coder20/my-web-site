@@ -76,27 +76,40 @@ async function getBackgroundVideo() {
  * Normalise l'URL de la vidéo pour utiliser une URL relative si elle pointe vers le même domaine
  * 
  * @param url - URL de la vidéo (peut être absolue ou relative)
- * @returns URL normalisée (relative si possible)
+ * @returns URL normalisée (relative si possible, absolue si nécessaire)
  */
 function normalizeVideoUrl(url: string | null): string | null {
   if (!url) return null;
+  
+  // Si c'est une URL absolue Supabase Storage, la garder telle quelle
+  // (nécessaire pour le développement local et la production)
+  if (url.includes("supabase.co/storage")) {
+    console.log("🔗 URL Supabase détectée, conservation de l'URL absolue:", url);
+    return url;
+  }
   
   // Si c'est une URL absolue pointant vers slimabida.fr, convertir en relative
   if (url.startsWith("https://slimabida.fr/") || url.startsWith("http://slimabida.fr/")) {
     return url.replace(/^https?:\/\/slimabida\.fr/, "");
   }
   
-  // Si c'est déjà une URL relative, la retourner telle quelle
-  if (url.startsWith("/")) {
+  // Si c'est une autre URL absolue (ex: YouTube, autres CDN), la retourner telle quelle
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    console.log("🔗 URL absolue détectée, conservation:", url);
     return url;
   }
   
-  // Si c'est une autre URL absolue (ex: YouTube), la retourner telle quelle
-  if (url.startsWith("http://") || url.startsWith("https://")) {
+  // Si c'est déjà une URL relative, la retourner telle quelle
+  // ⚠️ En développement local, les URLs relatives peuvent causer des erreurs 556
+  // si le fichier n'existe pas dans le dossier public
+  if (url.startsWith("/")) {
+    console.warn("⚠️ URL relative détectée en développement:", url);
+    console.warn("⚠️ Assurez-vous que le fichier existe dans le dossier public/ ou utilisez une URL Supabase");
     return url;
   }
   
   // Sinon, ajouter un / au début pour en faire une URL relative
+  console.warn("⚠️ URL non standard détectée, conversion en relative:", url);
   return `/${url}`;
 }
 
@@ -105,6 +118,17 @@ export default async function Home() {
   
   // Normaliser l'URL de la vidéo
   const normalizedUrl = normalizeVideoUrl(backgroundVideo?.videoUrl || null);
+  
+  // Log pour debug
+  if (normalizedUrl) {
+    console.log("🔗 URL normalisée de la vidéo d'arrière-plan:", {
+      original: backgroundVideo?.videoUrl,
+      normalized: normalizedUrl,
+      isSupabase: normalizedUrl.includes("supabase.co"),
+      isAbsolute: normalizedUrl.startsWith("http://") || normalizedUrl.startsWith("https://"),
+      isRelative: normalizedUrl.startsWith("/"),
+    });
+  }
 
   return (
     <HomeClient
