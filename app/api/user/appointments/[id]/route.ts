@@ -6,7 +6,7 @@ import { ObjectId } from "mongodb";
 // DELETE : Annuler un rendez-vous
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // 1. Vérifier l'authentification
@@ -18,8 +18,9 @@ export async function DELETE(
       );
     }
 
-    // 2. Récupérer l'ID du rendez-vous
-    const appointmentId = params.id;
+    // 2. Récupérer l'ID du rendez-vous (params est maintenant une Promise)
+    const { id } = await params;
+    const appointmentId = id;
 
     // Validation de l'ID
     if (!ObjectId.isValid(appointmentId)) {
