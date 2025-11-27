@@ -311,7 +311,7 @@ export const translations: Record<Language, Translations> = {
             "Développez vos compétences en composition. De l'idée initiale à la réalisation complète, explorez les techniques de création musicale et d'écriture.",
         },
       },
-      contactMe: "Me contacter",
+      contactMe: "Prendre rendez-vous",
     },
     contact: {
       name: "Nom",
@@ -458,7 +458,7 @@ export const translations: Record<Language, Translations> = {
             "Develop your composition skills. From the initial idea to complete realization, explore techniques of musical creation and writing.",
         },
       },
-      contactMe: "Contact me",
+      contactMe: "Book appointment",
     },
     contact: {
       name: "Name",

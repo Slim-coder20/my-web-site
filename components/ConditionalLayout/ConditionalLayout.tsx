@@ -11,8 +11,10 @@ export default function ConditionalLayout({
 }) {
   const pathname = usePathname();
   const isAdminPage = pathname?.startsWith("/admin");
+  const isUserPage = pathname?.startsWith("/user");
 
-  if (isAdminPage) {
+  // Masquer Header et Footer pour les pages admin et user
+  if (isAdminPage || isUserPage) {
     return <>{children}</>;
   }
 

@@ -43,7 +43,7 @@ export default function Pedago() {
               <div className={styles.courseInfo}>
                 <h2 className={styles.courseTitle}>{course.title}</h2>
                 <p className={styles.courseDescription}>{course.description}</p>
-                <Link href="/contact" className={styles.contactButton}>
+                <Link href="/register" className={styles.contactButton}>
                   {t.pedago.contactMe}
                 </Link>
               </div>
