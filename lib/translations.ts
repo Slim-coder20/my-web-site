@@ -243,7 +243,7 @@ export const translations: Record<Language, Translations> = {
         description:
           "Découvrez les dernières nouvelles de Slim Abida. Contrast nouvel album N'hésitez pas à nous suivre sur les réseaux sociaux et à nous soutenir en contribuant à notre Crowdfunding.",
         seeNews: "Voir les news →",
-        supportProject: "Soutenir le projet →",
+        supportProject: "Nouveau Single →",
       },
       about: {
         title: "À Propos",
@@ -279,7 +279,7 @@ export const translations: Record<Language, Translations> = {
       title: "Contrast - Nouvel Album",
       description:
         "Dans un monde où tout s'oppose et se complète, CONTRAST prend vie. Après Fréquences Basses (2020) et Asymétrie (2022), Slim Abida poursuit son exploration musicale, façonnant un univers où la beauté naît de la mise en évidence des contrastes qui jalonnent notre monde. Cet album est une immersion dans les dualités qui rythment nos existences : l'ombre et la lumière, l'amour et la haine, l'espoir et le désespoir, la justice et l'injustice. Chaque morceau est une facette d'un prisme émotionnel, une onde sonore oscillant entre harmonie et chaos, entre douceur et brutalité. Plus qu'un simple album, CONTRAST est une invitation à ressentir la complexité du monde au-delà des jugements binaires. Il ne tranche pas entre le bien et le mal, mais révèle toute la richesse et la profondeur sousjacentes. Il est ce point d'équilibre fragile entre les extrêmes, une quête d'harmonie au sein du tumulte.",
-      supportProject: "Soutenir le projet →",
+      supportProject: "Nouveau Single →",
       discoverDiscography: "Découvrir la discographie →",
       followMe: "Suivez-moi",
     },
@@ -390,7 +390,7 @@ export const translations: Record<Language, Translations> = {
         description:
           "Discover the latest news from Slim Abida. Contrast new album Don't hesitate to follow us on social networks and support us by contributing to our Crowdfunding.",
         seeNews: "See news →",
-        supportProject: "Support the project →",
+        supportProject: "New Single →",
       },
       about: {
         title: "About",
@@ -426,7 +426,7 @@ export const translations: Record<Language, Translations> = {
       title: "Contrast - New Album",
       description:
         "In a world where everything opposes and complements, CONTRAST comes to life. After Fréquences Basses (2020) and Asymétrie (2022), Slim Abida continues his musical exploration, shaping a universe where beauty is born from highlighting the contrasts that mark our world. This album is an immersion into the dualities that rhythm our existence: shadow and light, love and hate, hope and despair, justice and injustice. Each track is a facet of an emotional prism, a sound wave oscillating between harmony and chaos, between gentleness and brutality. More than just an album, CONTRAST is an invitation to feel the complexity of the world beyond binary judgments. It does not choose between good and evil, but reveals all the underlying richness and depth. It is that fragile point of balance between extremes, a quest for harmony within turmoil.",
-      supportProject: "Support the project →",
+      supportProject: "New Single →",
       discoverDiscography: "Discover discography →",
       followMe: "Follow me",
     },

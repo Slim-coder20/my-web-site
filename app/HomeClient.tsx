@@ -363,7 +363,7 @@ export default function HomeClient({
               {t.home.news.seeNews}
             </Link>
             <Link
-              href="https://fr.ulule.com/contrast-crowfunding/coming-soon "
+              href="https://distrokid.com/hyperfollow/slimabida/the-beginnings?ref=release"
               className={styles.secondaryButton}
               target="_blank"
             >

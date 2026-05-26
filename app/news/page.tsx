@@ -34,7 +34,7 @@ export default function News() {
 
           {/* Bouton vers la campagne de crowdfunding */}
           <div className={styles.buttonWrapper}>
-            <Link href="https://fr.ulule.com/contrast-crowfunding/coming-soon " className={styles.musicButton} target="_blank">
+            <Link href="https://distrokid.com/hyperfollow/slimabida/the-beginnings?ref=release" className={styles.musicButton} target="_blank">
               {t.news.supportProject}
             </Link>
             <Link href="/discographie" className={styles.musicButton}>
