@@ -19,7 +19,7 @@
   font-weight: 300;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0;
   text-align: center;
 }
@@ -35,7 +35,7 @@
   font-size: 1.3rem;
   font-weight: 400;
   letter-spacing: 0.1em;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0 0 1.5rem 0;
   text-transform: uppercase;
 }
@@ -49,8 +49,8 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 1.5rem;
 }
@@ -70,8 +70,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #888;
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-muted);
   border-radius: 4px;
   margin: 0 auto;
 }
@@ -87,13 +87,13 @@
   font-size: 1.3rem;
   font-weight: 400;
   letter-spacing: 0.1em;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0;
 }
 
 .productDescription {
   font-size: 0.95rem;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-weight: 300;
   margin: 0;
   line-height: 1.6;
@@ -103,7 +103,7 @@
 .productPrice {
   font-size: 1.5rem;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--color-text);
   margin-top: 0.5rem;
 }
 

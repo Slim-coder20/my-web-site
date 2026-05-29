@@ -14,11 +14,11 @@
   max-width: 500px;
   width: 100%;
   padding: 2rem;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--color-surface-muted);
   border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-md);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-border);
 }
 
 /* Titre */
@@ -27,7 +27,7 @@
   font-weight: 300;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-text);
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -51,7 +51,7 @@
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: 0.05em;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   text-transform: uppercase;
 }
 
@@ -60,17 +60,17 @@
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  border: 1px solid var(--color-border-strong);
+  background-color: var(--color-surface-muted);
+  color: var(--color-text);
   font-size: 1rem;
   transition: all 0.3s ease;
 }
 
 .formGroup input:focus {
   outline: none;
-  border-color: rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
 }
 
 .formGroup input:disabled {
@@ -102,10 +102,10 @@
 /* Bouton de soumission */
 .submitButton {
   padding: 0.75rem 1.5rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
   border-radius: 4px;
-  color: #ffffff;
+  color: var(--color-text-light);
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: 0.05em;
@@ -115,8 +115,8 @@
   margin-top: 0.5rem;
 }
 .submitButton:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-border-strong);
   transform: translateY(-2px);
 }
 
@@ -129,19 +129,19 @@
 /* Lien vers la page de connexion */
 .loginLink {
   text-align: center;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-size: 0.9rem;
   margin-top: 1rem;
 }
 
 .loginLink a {
-  color: #ffffff;
+  color: var(--color-text);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .loginLink a:hover {
-  color: #ffffff;
+  color: var(--color-text);
   opacity: 0.8;
 }
 

@@ -19,7 +19,7 @@
   font-weight: 300;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0;
   text-align: center;
 }
@@ -27,7 +27,7 @@
 .concertsDescription {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-weight: 300;
   text-align: center;
   margin: 0;
@@ -44,7 +44,7 @@
 .emptyState {
   text-align: center;
   padding: 4rem 2rem;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-size: 1.1rem;
 }
 

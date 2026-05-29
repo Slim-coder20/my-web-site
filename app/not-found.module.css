@@ -6,8 +6,8 @@
   min-height: calc(100vh - 200px);
   width: 100%;
   padding: 2rem;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   padding-top: 140px; /* Espace pour le header fixe */
 }
 
@@ -16,7 +16,7 @@
   font-weight: 300;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-text);
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -24,7 +24,7 @@
 .notFoundDescription {
   font-size: 1.2rem;
   line-height: 1.8;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   text-align: center;
   margin-bottom: 2.5rem;
   max-width: 600px;
@@ -37,16 +37,16 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-text-light);
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 }
 
 .homeButton:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary);
   transform: translateY(-2px);
 }
 

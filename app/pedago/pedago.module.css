@@ -20,14 +20,14 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-align: center;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0;
 }
 
 .description {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-weight: 300;
   text-align: center;
   margin: 0;
@@ -43,8 +43,8 @@
 .courseCard {
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -53,8 +53,8 @@
 
 .courseCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-strong);
   background-color: rgba(255, 255, 255, 0.04);
 }
 
@@ -78,14 +78,14 @@
   font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: 0.1em;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0;
   text-align: center;
 }
 
 .courseDescription {
   font-size: 0.95rem;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-weight: 300;
   margin: 0;
   line-height: 1.6;
@@ -95,10 +95,10 @@
 
 .contactButton {
   padding: 0.75rem 1.5rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
   border-radius: 4px;
-  color: #ffffff;
+  color: var(--color-text-light);
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: 0.05em;
@@ -112,8 +112,8 @@
 }
 
 .contactButton:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
   transform: translateY(-2px);
 }
 

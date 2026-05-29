@@ -19,7 +19,7 @@
   font-weight: 300;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0;
   text-align: center;
 }
@@ -27,7 +27,7 @@
 .description {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-weight: 300;
   text-align: center;
   margin: 0;
@@ -43,8 +43,8 @@
 .albumCard {
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -52,16 +52,16 @@
 
 .albumCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-strong);
 }
 
 .albumDetailContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 2rem;
   max-width: 1000px;
@@ -79,7 +79,7 @@
 .albumCover {
   width: 100%;
   aspect-ratio: 1 / 1;
-  background-color: #000000;
+  background-color: var(--color-text);
   overflow: hidden;
   position: relative;
 }
@@ -96,8 +96,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #888;
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-muted);
   font-size: 0.9rem;
 }
 
@@ -113,13 +113,13 @@
   font-size: 1.3rem;
   font-weight: 400;
   letter-spacing: 0.1em;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0;
 }
 
 .albumDescription {
   font-size: 0.95rem;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-weight: 300;
   margin: 0;
   line-height: 1.6;
@@ -132,21 +132,21 @@
   align-items: center;
   margin-top: auto;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--color-border);
 }
 
 .albumPrice {
   font-size: 1.2rem;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--color-text);
 }
 
 .buyButton {
   padding: 0.75rem 1.5rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
   border-radius: 4px;
-  color: #ffffff;
+  color: var(--color-text-light);
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: 0.05em;
@@ -155,15 +155,15 @@
 }
 
 .buyButton:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
   transform: translateY(-2px);
 }
 
 .emptyState {
   text-align: center;
   padding: 4rem 2rem;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-size: 1.1rem;
 }
 
@@ -172,7 +172,7 @@
 .socialLinks {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(150, 150, 150, 0.2);
+  border-top: 1px solid var(--color-border);
 }
 
 .socialTitle {
@@ -181,7 +181,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
-  color: #ffffff;
+  color: var(--color-text);
   margin-bottom: 1.5rem;
 }
 
@@ -196,7 +196,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   text-decoration: none;
   font-size: 0.95rem;
   transition: all 0.3s ease;
@@ -206,9 +206,9 @@
 }
 
 .socialLink:hover {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+  background-color: var(--color-surface-muted);
   transform: translateY(-2px);
 }
 

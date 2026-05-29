@@ -1,8 +1,8 @@
 .concertCard {
   display: flex;
   flex-direction: row;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -11,8 +11,8 @@
 
 .concertCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-strong);
 }
 
 .concertCardImageContainer {
@@ -20,7 +20,7 @@
   min-width: 300px;
   height: 200px;
   overflow: hidden;
-  background-color: #000000;
+  background-color: var(--color-text);
   position: relative;
 }
 
@@ -30,8 +30,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #888;
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-muted);
   font-size: 0.9rem;
   text-align: center;
   padding: 1rem;
@@ -61,7 +61,7 @@
   font-size: 1.3rem;
   font-weight: 400;
   letter-spacing: 0.1em;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0;
   text-transform: uppercase;
 }
@@ -69,13 +69,13 @@
 .concertCardDate {
   font-size: 1rem;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0;
 }
 
 .concertCardLocation {
   font-size: 0.95rem;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-weight: 300;
   margin: 0;
 }

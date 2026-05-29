@@ -22,7 +22,7 @@
   aspect-ratio: 1;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-md);
 }
 
 .profileImage {
@@ -44,7 +44,7 @@
   font-weight: 300;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-text);
   margin: 0;
 }
 
@@ -57,7 +57,7 @@
 .bioText p {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   font-weight: 300;
   margin: 0;
 }
@@ -79,15 +79,15 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-text);
+  border: 1px solid var(--color-border-strong);
   background-color: transparent;
   transition: all 0.3s ease;
 }
 
 .musicButton:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
   transform: translateY(-2px);
 }
 
@@ -95,7 +95,7 @@
 .socialLinks {
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(150, 150, 150, 0.2);
+  border-top: 1px solid var(--color-border);
 }
 
 .socialTitle {
@@ -103,7 +103,7 @@
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-text);
   margin-bottom: 1.5rem;
 }
 
@@ -117,7 +117,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #d0d0d0;
+  color: var(--color-text-muted);
   text-decoration: none;
   font-size: 0.95rem;
   transition: all 0.3s ease;
@@ -127,9 +127,9 @@
 }
 
 .socialLink:hover {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+  background-color: var(--color-surface-muted);
   transform: translateY(-2px);
 }
 

@@ -13,14 +13,7 @@
 .separator {
   width: 100%;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.2) 20%,
-    rgba(255, 255, 255, 0.4) 50%,
-    rgba(255, 255, 255, 0.2) 80%,
-    transparent 100%
-  );
+  background: var(--separator-gradient);
   margin-bottom: 1rem;
   flex-shrink: 0;
 }
@@ -36,15 +29,15 @@
   text-align: center;
 
   /* Style visuel */
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  color: var(--color-text-light);
+  background-color: var(--color-primary);
+  border: 2px solid var(--color-primary);
   border-radius: 6px;
 
   /* Effets */
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-sm);
 
   /* Layout */
   display: flex;
@@ -55,15 +48,15 @@
 }
 
 .languageButton:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-md);
 }
 
 .languageButton:active {
   transform: translateY(0);
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: var(--color-primary-active);
 }
 
 /* Masquer sur desktop */
