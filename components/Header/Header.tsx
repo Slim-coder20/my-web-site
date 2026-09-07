@@ -10,6 +10,9 @@ import LanguageButtonMobile from "@/components/LanguageButtonMobile/LanguageButt
 export default function Header() {
   const pathname = usePathname();
   const { language, setLanguage, t } = useLanguage();
+  // Seule la page d'accueil a un hero sombre (vidéo + overlay) derrière le header ;
+  // sur les autres pages le fond est clair, donc le header doit afficher un texte sombre.
+  const isHome = pathname === "/";
 
   const navLinks = [
     { href: "/", label: t.nav.home },
@@ -34,7 +37,7 @@ export default function Header() {
     setIsMenuOpen(false);
   };
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${!isHome ? styles.headerLight : ""}`}>
       <div className={styles.headerContainer}>
         {/* Nom de l'artiste en style manuscrit */}
 

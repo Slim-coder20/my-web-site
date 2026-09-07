@@ -102,6 +102,34 @@
   text-decoration-thickness: 1px;
 } */
 
+/* Variante claire du header : utilisée sur toutes les pages sauf l'accueil,
+   qui n'ont pas de hero sombre derrière le header fixe. Sans elle, le texte
+   blanc devient invisible sur le fond clair du site. */
+.headerLight .navLink {
+  color: var(--color-text);
+  text-shadow: none;
+}
+
+.headerLight .navLink:hover {
+  color: var(--color-primary);
+  opacity: 1;
+}
+
+.headerLight .languageButton {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+.headerLight .languageButton:hover {
+  background-color: rgba(61, 52, 41, 0.08);
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.headerLight .burgerIcon {
+  background-color: var(--color-text);
+}
+
 /* Bouton burger */
 .burgerButton {
   display: none;
