@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageButtonMobile from "@/components/LanguageButtonMobile/LanguageButtonMobile";
@@ -13,6 +13,16 @@ export default function Header() {
   // Seule la page d'accueil a un hero sombre (vidéo + overlay) derrière le header ;
   // sur les autres pages le fond est clair, donc le header doit afficher un texte sombre.
   const isHome = pathname === "/";
+
+  // Une fois qu'on a scrollé, le header (fixe) se superpose forcément à du
+  // contenu clair : on lui donne un fond et un texte sombre pour rester lisible.
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { href: "/", label: t.nav.home },
@@ -37,7 +47,11 @@ export default function Header() {
     setIsMenuOpen(false);
   };
   return (
-    <header className={`${styles.header} ${!isHome ? styles.headerLight : ""}`}>
+    <header
+      className={`${styles.header} ${
+        !isHome || isScrolled ? styles.headerLight : ""
+      } ${isScrolled ? styles.headerScrolled : ""}`}
+    >
       <div className={styles.headerContainer}>
         {/* Nom de l'artiste en style manuscrit */}
 

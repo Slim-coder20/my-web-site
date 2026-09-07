@@ -130,6 +130,15 @@
   background-color: var(--color-text);
 }
 
+/* Fond du header une fois qu'on a scrollé : garantit la lisibilité du texte
+   sombre même quand le header (fixe) est encore superposé au hero sombre
+   de l'accueil. */
+.headerScrolled {
+  background-color: rgba(245, 239, 227, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+}
+
 /* Bouton burger */
 .burgerButton {
   display: none;
