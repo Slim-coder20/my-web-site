@@ -34,15 +34,16 @@
 }
 
 .coursesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
+  display: flex;
+  justify-content: center;
   margin-top: 2rem;
 }
 
 .courseCard {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 420px;
   background-color: var(--color-surface-muted);
   border: 1px solid var(--color-border);
   border-radius: 8px;
@@ -137,8 +138,7 @@
   }
 
   .coursesGrid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    margin-top: 1.5rem;
   }
 }
 

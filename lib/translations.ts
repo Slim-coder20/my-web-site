@@ -119,16 +119,6 @@ export interface Translations {
         title: string; // "Basse Instrument"
         description: string; // Description du cours de basse
       };
-      // Cours d'arrangement
-      arrangement: {
-        title: string; // "Arrangement"
-        description: string; // Description du cours d'arrangement
-      };
-      // Cours de composition
-      composition: {
-        title: string; // "Composition"
-        description: string; // Description du cours de composition
-      };
     };
     contactMe: string; // Bouton "Me contacter" sur chaque carte de cours
   };
@@ -300,16 +290,6 @@ export const translations: Record<Language, Translations> = {
           description:
             "Apprenez la basse électrique avec Slim Abida. Cours personnalisés adaptés à votre niveau, de débutant à avancé. Technique, groove, harmonie et improvisation.",
         },
-        arrangement: {
-          title: "Arrangement",
-          description:
-            "Maîtrisez l'art de l'arrangement musical. Apprenez à orchestrer vos compositions, créer des textures sonores et développer votre identité musicale.",
-        },
-        composition: {
-          title: "Composition",
-          description:
-            "Développez vos compétences en composition. De l'idée initiale à la réalisation complète, explorez les techniques de création musicale et d'écriture.",
-        },
       },
       contactMe: "Prendre rendez-vous",
     },
@@ -446,16 +426,6 @@ export const translations: Record<Language, Translations> = {
           title: "Bass Instrument",
           description:
             "Learn electric bass with Slim Abida. Personalized courses adapted to your level, from beginner to advanced. Technique, groove, harmony, and improvisation.",
-        },
-        arrangement: {
-          title: "Arrangement",
-          description:
-            "Master the art of musical arrangement. Learn to orchestrate your compositions, create sound textures, and develop your musical identity.",
-        },
-        composition: {
-          title: "Composition",
-          description:
-            "Develop your composition skills. From the initial idea to complete realization, explore techniques of musical creation and writing.",
         },
       },
       contactMe: "Book appointment",
