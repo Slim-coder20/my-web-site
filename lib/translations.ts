@@ -127,11 +127,18 @@ export interface Translations {
   // FORMULAIRE DE CONTACT - Tous les textes du formulaire
   // ========================================================================
   contact: {
+    title: string; // Titre de la page "Contact"
+    description: string; // Description sous le titre
     // Labels des champs du formulaire
     name: string; // "Nom" / "Name"
     email: string; // "Email" / "Email"
     subject: string; // "Sujet" / "Subject"
     message: string; // "Message" / "Message"
+
+    // Placeholders des champs du formulaire
+    namePlaceholder: string;
+    emailPlaceholder: string;
+    messagePlaceholder: string;
 
     // Bouton d'envoi
     send: string; // "Envoyer" / "Send"
@@ -294,10 +301,16 @@ export const translations: Record<Language, Translations> = {
       contactMe: "Prendre rendez-vous",
     },
     contact: {
+      title: "Contact",
+      description:
+        "Une question, une envie de collaboration ou une demande de cours ? Écrivez-moi, je vous répondrai dans les plus brefs délais.",
       name: "Nom",
       email: "Email",
       subject: "Sujet",
       message: "Message",
+      namePlaceholder: "Jean Dupont",
+      emailPlaceholder: "vous@exemple.com",
+      messagePlaceholder: "Écrivez votre message ici...",
       send: "Envoyer",
       sending: "Envoi en cours...",
       subjectOptions: {
@@ -431,10 +444,16 @@ export const translations: Record<Language, Translations> = {
       contactMe: "Book appointment",
     },
     contact: {
+      title: "Contact",
+      description:
+        "A question, a collaboration idea, or a lesson request? Get in touch, I'll get back to you as soon as possible.",
       name: "Name",
       email: "Email",
       subject: "Subject",
       message: "Message",
+      namePlaceholder: "John Doe",
+      emailPlaceholder: "you@example.com",
+      messagePlaceholder: "Write your message here...",
       send: "Send",
       sending: "Sending...",
       subjectOptions: {
