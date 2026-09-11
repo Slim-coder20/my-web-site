@@ -20,6 +20,8 @@ export default function AdminLayout({
       router.push("/admin");
       return;
     }
+    // sessionStorage n'existe que côté client (pas au SSR), d'où l'effet plutôt qu'un calcul au rendu
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsAuthenticated(true);
   }, [router]);
 

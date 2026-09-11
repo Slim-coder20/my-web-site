@@ -63,7 +63,8 @@ export default function AdminDashboard() {
       router.push("/admin");
       return;
     }
-    // Définit l'état d'authentification à true pour afficher le dashboard
+    // sessionStorage n'existe que côté client (pas au SSR), d'où l'effet plutôt qu'un calcul au rendu
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsAuthenticated(true);
   }, [router]);
 
