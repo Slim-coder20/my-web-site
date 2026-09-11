@@ -294,7 +294,12 @@ export default function HomeClient({
           <h3 className={styles.heroSubtitle2}>{t.home.subtitle}</h3>
           <p className={styles.heroSubtitle}>{t.home.subtitle2}</p>
           <div className={styles.heroButtons}>
-            <Link href="/discographie" className={styles.primaryButton}>
+            <Link
+              href="https://open.spotify.com/intl-fr/track/5sAA0jOsNZ7fjodadjh0Wl"
+              className={styles.primaryButton}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {t.home.discoverMusic}
             </Link>
             <Link href="/concerts" className={styles.secondaryButton}>
